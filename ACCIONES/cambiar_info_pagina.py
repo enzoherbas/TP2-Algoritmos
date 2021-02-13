@@ -13,6 +13,11 @@ cambios = {
         3:("telefono","phone")
         }
 
+def validacion_en_rango(rango_min, rango_max):
+    opcion = input("Opcion: ")
+    while not opcion.isnumeric() or int(opcion) not in range(rango_min, rango_max):
+        opcion = input("La opcion ingresada no es valida. Por favor, vuelva a intentar: ")
+    return int(opcion)
 
 def cambio(page_id):
     print("Que quiere cambiar:")
