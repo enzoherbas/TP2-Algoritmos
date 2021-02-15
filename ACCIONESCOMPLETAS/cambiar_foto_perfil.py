@@ -24,8 +24,6 @@ def foto_url(page_id):
         url = input("Ingrese url de la imagen: ")
         post_args = {"picture":url,"access_token":api._access_token}
         peticion = api._request(path=f"v9.0/{page_id}/picture",method="POST",post_args = post_args)
-        # data = api._parse_response(peticion)
-        # print(data)
         print("se ha cambiado al foto de perfil")
 
 def listar_fotos_publicadas(page_id):
@@ -50,8 +48,6 @@ def foto_ya_publicada(page_id):
         access_token = api._access_token
         post_args = {"photo":foto, "access_token":access_token, "reuse":reuse}
         peticion = api._request(path = f"v9.0/{page_id}/picture", method = "POST", post_args = post_args)
-        # data = api._parse_response(peticion)
-        # return data
         print("Se ha cambiado la foto de perfil")
 
 def validacion_en_rango(rango_min, rango_max):
