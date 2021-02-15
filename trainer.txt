@@ -1,41 +1,34 @@
-Hola Crux como te va?,Bien aca andamos. Quieres ver las opciones?,Veamos las opciones,Vamos a ver las opciones!
-Hola Crux, Hola! Queres ver las opciones?, Miremos esas opciones, Vamos a ver las opciones!
-Hola a ver las opciones, Vamos a ver las opciones!
-Ver opciones, Vamos a ver las opciones!
 
-Quiero leer una publicacion , Copiado! Vamos a ver que posteos que hay
-Quiero leer un post, Copiado! Vamos a ver que posteos que hay
-Veamos los post, Copiado! Vamos a ver que posteos que hay
-A ver los posts, Copiado! Vamos a ver los posteos que hay
-Ver posts, Copiado! Vamos a ver los posteos que hay
-
-Quiero dar un like, Entonces vamos a ver en que posteo deseas dar tu like
-Quiero dar un me gusta, Entonces vamos a ver en que posteo deseas dar tu like
-Quiero likear un post, Entonces vamos a ver en que posteo deseas dar tu like
-Like post, Entonces vamos a ver que posteo deseas dar tu like
-
-Quiero cambiar un post, Perfecto. Vamos a modificar un posteo
-Quiero modificar un posteo, Perfecto. Vamos a modificar un posteo
-Quiero actualizar el post, Perfecto. Vamos a modificar un posteo
-Modificar post, Perfecto. Vamos a modificar un posteo
-
-Quiero postear algo, Vamos a realizar un post!
-Subamos algo, Vamos a realizar un post!
-Deseo subir algo, Vamos a realizar un post!
-Subir post, Vamos a realizar un post!
-
-Quiero subir una foto, Vamos a subir una foto!
-Subir foto, Vamos a subir una foto!
-Foto, Vamos a subir una foto!
-
-Quiero ver mis seguidores, Entendido cap@! Vamos a ver los seguidores
-Veamos seguidores, Entendido cap@! Vamos a ver los seguidores
-
-Quiero actualizar mis datos de perfil, Entendido que cambiamos del perfil?
-Quiero cambiar mi perfil, Entendido que cambiamos del perfil?
-Actualizar perfil, Entendido que cambiamos del perfil?
-
-Eso es todo Crux! Chau , Hasta la proxima!
-Chau, Hasta la proxima!
-Adios, Hasta la proxima!
-Salir, Hasta la proxima!
+Hola Crux Como estas?, Bien aca andamos. Quieres ver las opciones?,Veamos las opciones,Vamos a ver las opciones!
+Hola Crux, Hola! Queres ver las opciones?, Miremos esas opciones,Vamos a ver las opciones!
+Hola a ver las opciones,Vamos a ver las opciones!
+Ver opciones,Vamos a ver las opciones!
+Quiero leer una publicacion ,Copiado! Vamos a ver que posteos que hay
+Quiero leer un post,Copiado! Vamos a ver que posteos que hay
+Veamos los post,Copiado! Vamos a ver que posteos que hay
+A ver los posts,Copiado! Vamos a ver que posteos que hay
+Ver posts,Copiado! Vamos a ver que posteos que hay
+Quiero dar un like,Entonces vamos a ver en que posteo deseas dar tu like
+Quiero dar un me gusta,Entonces vamos a ver en que posteo deseas dar tu like
+Quiero likear un post,Entonces vamos a ver en que posteo deseas dar tu like
+Like post,Entonces vamos a ver en que posteo deseas dar tu like
+Quiero cambiar un post,Perfecto. Vamos a modificar un posteo
+Quiero modificar un posteo,Perfecto. Vamos a modificar un posteo
+Quiero actualizar el post,Perfecto. Vamos a modificar un posteo
+Modificar post,Perfecto. Vamos a modificar un posteo
+Quiero postear algo,Vamos a realizar un post!
+Subamos algo,Vamos a realizar un post!
+Deseo subir algo,Vamos a realizar un post!
+Subir post,Vamos a realizar un post!
+Quiero subir una foto,Vamos a subir una foto!
+Subir foto,Vamos a subir una foto!
+Foto,Vamos a subir una foto!
+Quiero ver mis seguidores,Entendido capo! Vamos a ver los seguidores
+Veamos seguidores,Entendido capo! Vamos a ver los seguidores
+Quiero actualizar mis datos de perfil,Entendido que cambiamos del perfil?
+Quiero cambiar mi perfil,Entendido que cambiamos del perfil?
+Actualizar perfil,Entendido que cambiamos del perfil?
+Eso es todo Crux! Chau ,Hasta la proxima!
+Chau,Hasta la proxima!
+Adios,Hasta la proxima!
+Salir,Hasta la proxima!
