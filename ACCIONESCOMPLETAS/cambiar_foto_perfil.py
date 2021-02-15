@@ -34,9 +34,9 @@ def listar_fotos_publicadas(page_id):
         for ids in datos["data"]:
                 lista_ids.append(ids["id"])
         for ids in lista_ids:
-                peticion_2 = api._request(path = f"v9.0/{page_id}_{ids}?fields=permalink_url", method = "GET")
+                peticion_2 = api._request(path = f"v9.0/{ids}?fields=link,album", method = "GET")
                 datos_2 = api._parse_response(peticion_2)
-                print(cont, datos_2["permalink_url"])
+                print(cont, datos_2["link"], datos_2["album"]["name"])
                 cont += 1
         opcion = validacion_en_rango(1,cont)
         foto_seleccionada = lista_ids[opcion-1]
