@@ -11,6 +11,6 @@ filename = askopenfilename()
 
 def post_image():
     api.put_photo(image = open(r"{0}".format(filename),"rb"), message = input("Ingrese descripcion de la foto: "))
-
+ 
 if __name__ == "__main__":
     post_image()
