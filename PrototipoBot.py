@@ -123,11 +123,17 @@ def actualizar_post(post_id):
 
 def cantidad_seguidores():
     '''
-    Muestra la cantidad de seguidores que tiene la pagina y el nombre
+    Muestra la cantidad de seguidores,likes y nombre que tiene la pagina
     '''
-    peticion = DATOS._request(path="v9.0/{0}?fields=fan_count,name".format(ID_PAGINA),method="GET")
+    argumentos_get = {"fields" : "followers_count,fan_count,name"}
+    peticion = DATOS._request(path="v9.0/{0}?".format(ID_PAGINA),args=argumentos_get,method="GET")
     data = DATOS._parse_response(peticion)
-    print("Hay {0} seguidores en la pagina {1}!".format(data["fan_count"],data["name"]))
+    print('''
+          La cantidad de personas que interactuan con la pagina "{2}"
+          son 
+          {0} Followers 
+          {1} Likes en la pagina
+          '''.format(data["followers_count"],data["fan_count"],data["name"]))
     return True
 
 def actualizar_datos():
