@@ -27,7 +27,6 @@ def foto_url(page_id):
         print("se ha cambiado al foto de perfil")
 
 def listar_fotos_publicadas(page_id):
-        cont = 1
         peticion = api._request(path = f"v9.0/{page_id}/photos?type=uploaded", method = "GET")
         datos = api._parse_response(peticion)
         lista_ids = [] 
@@ -36,8 +35,8 @@ def listar_fotos_publicadas(page_id):
         for ids in lista_ids:
                 peticion_2 = api._request(path = f"v9.0/{ids}?fields=link,album", method = "GET")
                 datos_2 = api._parse_response(peticion_2)
-                print(cont, datos_2["link"], datos_2["album"]["name"])
-                cont += 1
+                nro = lista_ids.index(ids) + 1
+                print(nro, datos_2["link"], datos_2["album"]["name"])
         opcion = validacion_en_rango(1,cont)
         foto_seleccionada = lista_ids[opcion-1]
         return foto_seleccionada
