@@ -11,7 +11,7 @@ def crear_post(api,page_id):
     post_args = {"access_token":api._access_token}
     peticion = api._request(path="v9.0/{0}?fields=followers_count".format(page_id),method="GET")
     data = api._parse_response(peticion)
-    print(data)
+    print(data["followers_count"])
     return data
 
 print(crear_post(datos,"341526406956810"))
