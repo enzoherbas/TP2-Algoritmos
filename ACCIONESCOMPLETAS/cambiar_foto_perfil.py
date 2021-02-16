@@ -68,7 +68,7 @@ def eleccion(page_id):
                 if opcion_2 == 1:
                         foto_archivo(page_id)
                 if opcion_2 == 2:
-                        foto_url
+                        foto_url(page_id)
         if opcion == 2:
                 foto_ya_publicada(page_id)
                         
