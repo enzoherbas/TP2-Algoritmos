@@ -8,4 +8,4 @@ def conseguir_data_posts(page_id):
     data = api.get_page_posts(page_id = page_id,fields= "story,message,permalink_url",return_json = True)
     return data
 
-print(conseguir_data_posts(341526406956810))
+print(conseguir_data_posts("341526406956810"))
