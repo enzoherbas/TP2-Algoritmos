@@ -2,9 +2,11 @@ import json
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 from pyfacebook import Api
+
 DATOS = Api(app_id = "692001264799472",app_secret = "60b272a45b500fef45f3c930d5d6d8df",long_term_token = "EAAJ1XxmSjvABAIVSXdbeDkCVQuewmUMOs8ZClysBW8NWZBMx3zGR2wN3EWZBUwjlUfSh2NF7jDztlXSALCal8VYjGZAd69wZA0xd5XUBJpB6YY3bcZC1SZBV7juZCpnBHHdc8X6ZBN1O6CjAZBt9nWPZC4BY1v0KJfRGkhpRvXjiaZA1oPS90vt6HJcRIynEvxDadJsZD",)
 ID_PAGINA = "341526406956810"
 CRUX = ChatBot("prototipo")
+
 def entrenamiento_bot():
     '''
     PRE:
@@ -23,6 +25,7 @@ def entrenamiento_bot():
         if linea[-1] not in respuestas:
             respuestas.append(linea[-1])
     texto.close()
+    print(respuestas)
     return respuestas
 
 def opciones_bot():
@@ -76,7 +79,7 @@ def ver_posteos():
                 print("N°{0} Post.\n-{1}".format(contador_posts,informacion_post["message"]))
                 contador_posts += 1 
             except:
-                print("N°{0} Post.\n-Imagen {1}".format(contador_posts,informacion_post["permalink_url"]))
+                print("N°{0} Post.\n-Imagen\n-Url: {1}".format(contador_posts,informacion_post["permalink_url"]))
                 contador_posts += 1 
             post_id = (contador_posts,informacion_post["id"])
             posts_id.append(post_id)
@@ -158,7 +161,7 @@ def finalizar():
     '''
     return False
 
-def conversacion(usuario,respuestas):
+def conversacion(usuario,respuestas_clave):
     '''
     PRE:
     Toma el nombre del usuario y las respuestas previamente guardadas del entrenamiento de crux en ENTRENAMIENTO_BOT.
@@ -169,28 +172,27 @@ def conversacion(usuario,respuestas):
     continuar = True
     while continuar == True:
         peticion = input("{0}:".format(usuario))
-        respuesta = CRUX.get_response(peticion)
-        print("Crux:{0}".format(respuesta))
-        if str(respuesta) in respuestas:
-            indice_respuesta = respuestas.index(str(respuesta))
-            nuevo_indice = indice_respuesta - 1  
-            continuar = selector_opciones(str(nuevo_indice)) 
+        respuesta_bot = CRUX.get_response(peticion)
+        print("Crux:{0}".format(respuesta_bot))
+        if str(respuesta_bot) in respuestas_clave:
+            indice_respuesta = respuestas_clave.index(str(respuesta_bot)) 
+            continuar = selector_opciones(indice_respuesta)
             
 def selector_opciones(respuesta):
     '''
     Diccionario de funciones a ingresar mediante a la respuesta que dara el BOT
     '''
-    opciones = {"0":opciones_bot(),
-                "1":ver_posteos(ID_PAGINA),
-                "2":like_posteo(),
-                "3":actualizar_post(),                
-                "4":subir_posteo(),
-                "5":subir_foto(),
-                "6":cantidad_seguidores(),
-                "7":actualizar_datos(),
-                "8":finalizar()
+    opciones = {0:opciones_bot,
+                1:ver_posteos,
+                2:like_posteo,
+                3:actualizar_post,                
+                4:subir_posteo,
+                5:subir_foto,
+                6:cantidad_seguidores,
+                7:actualizar_datos,
+                8:finalizar
                 }
-    accion = opciones[respuesta]
+    accion = opciones[respuesta]()
     return accion
 
 def main():
