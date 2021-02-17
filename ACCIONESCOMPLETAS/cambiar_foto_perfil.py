@@ -1,8 +1,12 @@
 import facebook
-from tkinter import Tk
-from tkinter.filedialog import askopenfilename
+import tkinter as tk
+from tkinter import filedialog
 from pyfacebook import Api
 import json
+
+window = tk.Tk()
+window.wm_attributes('-topmost', 1)
+window.withdraw()
 
 api = Api(
         app_id = "692001264799472",
@@ -11,12 +15,11 @@ api = Api(
         )
 long_term_token = "EAAJ1XxmSjvABAIVSXdbeDkCVQuewmUMOs8ZClysBW8NWZBMx3zGR2wN3EWZBUwjlUfSh2NF7jDztlXSALCal8VYjGZAd69wZA0xd5XUBJpB6YY3bcZC1SZBV7juZCpnBHHdc8X6ZBN1O6CjAZBt9nWPZC4BY1v0KJfRGkhpRvXjiaZA1oPS90vt6HJcRIynEvxDadJsZD",
 api_2 = facebook.GraphAPI(long_term_token)
-Tk().withdraw()
 
 def foto_archivo(page_id):
-        try:
-                filename = askopenfilename() 
-                api_2.put_photo(image = open(r"{0}".format(filename),"rb"), album_path=f"{page_id}/picture")
+        try:  
+                filename = filedialog.askopenfilename()
+                api_2.put_photo(image = open(r"{0}".format(filename),"rb"), album_path=f"{page_id}/picture")             
         except:
                 print("no pasa nada pa")                
 
