@@ -218,9 +218,7 @@ def selector_opciones(respuesta):
     Diccionario de funciones a ingresar mediante a la respuesta que dara el BOT
     '''
     opciones = {0:opciones_bot,
-                1:ver_posteos,
-                2:like_posteo,
-                3:actualizar_post,                
+                1:ver_posteos,                
                 4:subir_posteo,
                 5:subir_foto,
                 6:cantidad_seguidores,
