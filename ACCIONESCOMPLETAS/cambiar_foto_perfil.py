@@ -1,4 +1,5 @@
 import facebook
+import pyfacebook
 import tkinter as tk
 from tkinter import filedialog
 from pyfacebook import Api
@@ -17,17 +18,41 @@ long_term_token = "EAAJ1XxmSjvABAIVSXdbeDkCVQuewmUMOs8ZClysBW8NWZBMx3zGR2wN3EWZB
 api_2 = facebook.GraphAPI(long_term_token)
 
 def foto_archivo(page_id):
-        try:  
-                filename = filedialog.askopenfilename()
+        archivos_soportados = ["peg","bmp","png","gif","iff"]
+        try: 
+                ingreso_correcto = False
+                while not ingreso_correcto:
+                        filename = filedialog.askopenfilename()
+                        if filename[-3::] in archivos_soportados:
+                                ingreso_correcto = True
+                        else:
+                                print("El archivo elegido es incorrecto, vuelva a elegir.")
+
                 api_2.put_photo(image = open(r"{0}".format(filename),"rb"), album_path=f"{page_id}/picture")             
         except:
-                print("no pasa nada pa")                
+                print("La foto de perfil ha sido actualizada.")                
 
 def foto_url(page_id):
-        url = input("Ingrese url de la imagen: ")
-        post_args = {"picture":url,"access_token":api._access_token}
-        peticion = api._request(path=f"v9.0/{page_id}/picture",method="POST",post_args = post_args)
-        print("se ha cambiado al foto de perfil")
+                ingreso_correcto = False
+                while not ingreso_correcto:
+                        try:
+                                url = input("Ingrese url de la imagen: ")
+                                post_args = {"picture":url,"access_token":api._access_token}
+                                peticion = api._request(path=f"v9.0/{page_id}/picture",method="POST",post_args = post_args)
+                                data = api._parse_response(peticion)
+                                print(data)
+                                ingreso_correcto = True
+                        except pyfacebook.error.PyFacebookException as error:
+                                        if "(#100) picture should represent a valid URL" == error.message:
+                                                print("URL ingresado no valido.")
+                                        elif "Missing or invalid image file" == error.message:
+                                                print("URL ingresado no contiene una imagen.")
+                                        else:
+                                                print("Se ha subio la foto correctamente.")
+                                                ingreso_correcto = True
+                                
+
+
 
 def listar_fotos_publicadas(page_id):
         peticion = api._request(path = f"v9.0/{page_id}/photos?type=uploaded", method = "GET")
