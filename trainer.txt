@@ -1,34 +1,59 @@
+si,Vamos a ver las opciones!
+muestra opciones,Vamos a ver las opciones!
+miremos esas opciones,Vamos a ver las opciones!
+ver opciones,Vamos a ver las opciones!
+opciones,Vamos a ver las opciones!
+leer publicaciones,Copiado! Vamos a ver que posteos que hay
+leer posteos,Copiado! Vamos a ver que posteos que hay
+ver posts,Copiado! Vamos a ver que posteos que hay
+muestrame los posts,Copiado! Vamos a ver que posteos que hay
+posts,Copiado! Vamos a ver que posteos que hay
+publicaciones,Copiado! Vamos a ver que posteos que hay
+ver publicaciones,Copiado! Vamos a ver que posteos que hay
+ver posts,Copiado! Vamos a ver que posteos que hay
+dar like,Entonces vamos a ver en que posteo deseas dar tu like
+dar me gusta,Entonces vamos a ver en que posteo deseas dar tu like
+likear un post,Entonces vamos a ver en que posteo deseas dar tu like
+likear publicacion,Entonces vamos a ver en que posteo deseas dar tu like
+me gusta,Entonces vamos a ver en que posteo deseas dar tu like
+like,Entonces vamos a ver en que posteo deseas dar tu like
+cambiar post,Perfecto. Vamos a modificar un posteo
+modificar post,Perfecto. Vamos a modificar un posteo
+actualizar post,Perfecto. Vamos a modificar un posteo
+cambiar publicacion,Perfecto. Vamos a modificar un posteo
+modificar publicacion,Perfecto. Vamos a modificar un posteo
+modificar,Perfecto. Vamos a modificar un posteo
+cambiar,Perfecto. Vamos a modificar un posteo
+postear,Vamos a realizar un post!
+hacer un post,Vamos a realizar un post!
+hacer una publicacion,Vamos a realizar un post!
+publicar,Vamos a realizar un post!
+subir un post,Vamos a realizar un post!
+subir post,Vamos a realizar un post!
+subir foto,Vamos a subir una foto!
+publicar foto,Vamos a subir una foto!
+foto,Vamos a subir una foto!
+subir imagen,Vamos a subir una foto!
+publicar imagen,Vamos a subir una foto!
+imagen,Vamos a subir una foto!
+ver seguidores,Entendido capo! Vamos a ver los seguidores
+veamos seguidores,Entendido capo! Vamos a ver los seguidores
+followers,Entendido capo! Vamos a ver los seguidores
+ver followers,Entendido capo! Vamos a ver los seguidores
+seguidores,Entendido capo! Vamos a ver los seguidores
+perfil,Entendido veremos el perfil
+mostrar perfil,Entendido veremos el perfil
+ver perfil,Entendido veremos el perfil
+chau ,Hasta la proxima!
+adios,Hasta la proxima!
+cerrar,Hasta la proxima!
+salir,Hasta la proxima!
+saludo inicial, Holaaaaa! Bienvenido soy CRUX el asistente de la pagina virtual de facebook!
+hola crux,Bienvenido otra vez! Desea ver las opciones?
+hola,Bienvenido otra vez! Desea ver las opciones?
+hello,Bienvenido otra vez! Desea ver las opciones?
+como estas?,Estoy bien y vos?
+bien y vos?,Estoy bien y vos?
+bien,Me alegro!Vemos opciones?
+mal,Me alegro!Vemos opciones?
 
-Hola Crux Como estas?, Bien aca andamos. Quieres ver las opciones?,Veamos las opciones,Vamos a ver las opciones!
-Hola Crux, Hola! Queres ver las opciones?, Miremos esas opciones,Vamos a ver las opciones!
-Hola a ver las opciones,Vamos a ver las opciones!
-Ver opciones,Vamos a ver las opciones!
-Quiero leer una publicacion ,Copiado! Vamos a ver que posteos que hay
-Quiero leer un post,Copiado! Vamos a ver que posteos que hay
-Veamos los post,Copiado! Vamos a ver que posteos que hay
-A ver los posts,Copiado! Vamos a ver que posteos que hay
-Ver posts,Copiado! Vamos a ver que posteos que hay
-Quiero dar un like,Entonces vamos a ver en que posteo deseas dar tu like
-Quiero dar un me gusta,Entonces vamos a ver en que posteo deseas dar tu like
-Quiero likear un post,Entonces vamos a ver en que posteo deseas dar tu like
-Like post,Entonces vamos a ver en que posteo deseas dar tu like
-Quiero cambiar un post,Perfecto. Vamos a modificar un posteo
-Quiero modificar un posteo,Perfecto. Vamos a modificar un posteo
-Quiero actualizar el post,Perfecto. Vamos a modificar un posteo
-Modificar post,Perfecto. Vamos a modificar un posteo
-Quiero postear algo,Vamos a realizar un post!
-Subamos algo,Vamos a realizar un post!
-Deseo subir algo,Vamos a realizar un post!
-Subir post,Vamos a realizar un post!
-Quiero subir una foto,Vamos a subir una foto!
-Subir foto,Vamos a subir una foto!
-Foto,Vamos a subir una foto!
-Quiero ver mis seguidores,Entendido capo! Vamos a ver los seguidores
-Veamos seguidores,Entendido capo! Vamos a ver los seguidores
-Quiero actualizar mis datos de perfil,Entendido que cambiamos del perfil?
-Quiero cambiar mi perfil,Entendido que cambiamos del perfil?
-Actualizar perfil,Entendido que cambiamos del perfil?
-Eso es todo Crux! Chau ,Hasta la proxima!
-Chau,Hasta la proxima!
-Adios,Hasta la proxima!
-Salir,Hasta la proxima!
