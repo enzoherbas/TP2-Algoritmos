@@ -11,10 +11,19 @@ long_term_token = "EAAJ1XxmSjvABAIVSXdbeDkCVQuewmUMOs8ZClysBW8NWZBMx3zGR2wN3EWZB
 
 api = facebook.GraphAPI(long_term_token)
 
-filename = filedialog.askopenfilename()
 
 def post_image():
-    api.put_photo(image = open(r"{0}".format(filename),"rb"), message = input("Ingrese descripcion de la foto: "))
+        archivos_soportados = ["peg","bmp","png","gif","iff"]
+        ingreso_correcto = False
+        while not ingreso_correcto:
+                filename = filedialog.askopenfilename()
+                if filename[-3::] in archivos_soportados:
+                        ingreso_correcto = True
+                else:
+                        print("El archivo elegido es incorrecto, vuelva a elegir.")
+        api.put_photo(image = open(r"{0}".format(filename),"rb"), message = input("Ingrese descripcion de la foto: "))
+        print("Se ha subido el posteo")
+
 
 if __name__ == "__main__":
     post_image()
