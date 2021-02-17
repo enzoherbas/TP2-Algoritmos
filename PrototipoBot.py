@@ -5,7 +5,13 @@ from pyfacebook import Api
 
 DATOS = Api(app_id = "692001264799472",app_secret = "60b272a45b500fef45f3c930d5d6d8df",long_term_token = "EAAJ1XxmSjvABAIVSXdbeDkCVQuewmUMOs8ZClysBW8NWZBMx3zGR2wN3EWZBUwjlUfSh2NF7jDztlXSALCal8VYjGZAd69wZA0xd5XUBJpB6YY3bcZC1SZBV7juZCpnBHHdc8X6ZBN1O6CjAZBt9nWPZC4BY1v0KJfRGkhpRvXjiaZA1oPS90vt6HJcRIynEvxDadJsZD",)
 ID_PAGINA = "341526406956810"
-CRUX = ChatBot("prototipo")
+CRUX = ChatBot("prototipo_bot",logic_adapters=[
+        {
+            'import_path': 'chatterbot.logic.BestMatch',
+            'default_response': 'Disculpa, no logro entenderte. Intenta escribirlo de otra manera',
+            'maximum_similarity_threshold': 0.80
+        }
+    ])
 
 def entrenamiento_bot():
     '''
@@ -19,13 +25,15 @@ def entrenamiento_bot():
     entrenamiento = ListTrainer(CRUX)
     texto = open("trainer.txt")
     respuestas = []
+    contador = 0
     for linea in texto:
         linea = linea.rstrip("\n").split(",")
-        entrenamiento.train(linea)
-        if linea[-1] not in respuestas:
+        #entrenamiento.train(linea)
+        if linea[-1] not in respuestas and contador <= 8:
             respuestas.append(linea[-1])
-    texto.close()
+            contador += 1
     print(respuestas)
+    texto.close()
     return respuestas
 
 def opciones_bot():
@@ -71,7 +79,7 @@ def ver_posteos():
     las modicaciones se enviaran a LIKE_POSTEO o ACTUALIZAR_POSTEO
     '''
     posts_id = []
-    informacion_posts = DATOS.get_page_posts(page_id = ID_PAGINA,fields= "story,message,permalink_url",return_json = True)
+    informacion_posts = DATOS.get_page_posts(page_id = ID_PAGINA,fields= "story,message,permalink_url",return_json = True,count=None)
     contador_posts = 1
     for informacion_post in informacion_posts:
         if ("story") not in informacion_post:        
@@ -97,7 +105,7 @@ def ver_posteos():
         else:
             finalizar_modificaciones = True
             
-    return dict(posts_id)
+    return True
 
 def subir_posteo():
     '''
@@ -143,7 +151,34 @@ def actualizar_datos():
     '''
     Actualiza los datos de la pagina
     '''
-    print("Actualizar datos")
+    cambios = {
+        1:("Descripcion de pagina","about"),
+        2:("Email","emails"),   
+        3:("Telefono","phone")
+        }
+    print("Que desea modificar del perfil:")
+    for codigo, valor in cambios.items():
+        print(f"{codigo}. {valor[0]}")
+    opcion = input("Opcion: ")
+    while not opcion.isnumeric() or int(opcion) not in range(1,4):
+        opcion = input("La opcion ingresada no es valida. Por favor, vuelva a intentar: ")
+    opcion = int(opcion) 
+    continuar = False
+    while continuar == False:
+        try:
+            cambio = input(f"Ingrese su nuevo/a {cambios[opcion][0]}: ".capitalize())
+            if opcion == 2:
+                cambio = cambio.split()
+            post_args = {"Access token":DATOS._access_token}
+            peticion = DATOS._request(path = f"v9.0/{ID_PAGINA}?{cambios[opcion][1]}={cambio}", method = "POST", post_args = post_args)
+            data = DATOS._parse_response(peticion)
+            continuar = True 
+        except:
+            if opcion == 2:
+                print("Debe ingresar un email valido.")
+            else:
+                print("Debe ingresar un numero de telefono valido.")
+    print("Se modificaron los datos con exito!")
     return True
 
 def subir_foto():
