@@ -22,17 +22,29 @@ def validacion_en_rango(rango_min, rango_max):
 
 
 def cambio(page_id):
-    print("Que quiere cambiar:")
+    print("Que desea modificar del perfil:")
     for codigo, valor in cambios.items():
-        print(f"{codigo}. {valor[0]}".capitalize())
-    opcion = validacion_en_rango(1,4)
-    cambio = input(f"Ingrese su nuevo/a {cambios[opcion][0]}: ")
-    if opcion == 2:
-        cambio = cambio.split()
-    post_args = {"Access token":api._access_token}
-    peticion = api._request(path = f"v9.0/{page_id}?{cambios[opcion][1]}={cambio}", method = "POST", post_args = post_args)
-    data = api._parse_response(peticion)
-    return data
+        print(f"{codigo}. {valor[0]}")
+    opcion = input("Opcion: ")
+    while not opcion.isnumeric() or int(opcion) not in range(1,4):
+        opcion = input("La opcion ingresada no es valida. Por favor, vuelva a intentar: ")
+    opcion = int(opcion) 
+    continuar = False
+    while continuar == False:
+        try:
+            cambio = input(f"Ingrese su nuevo/a {cambios[opcion][0]}: ".capitalize())
+            if opcion == 2:
+                cambio = cambio.split()
+            post_args = {"Access token":DATOS._access_token}
+            peticion = DATOS._request(path = f"v9.0/{ID_PAGINA}?{cambios[opcion][1]}={cambio}", method = "POST", post_args = post_args)
+            data = DATOS._parse_response(peticion)
+            continuar = True 
+        except:
+            if opcion == 2:
+                print("Debe ingresar un email valido.")
+            else:
+                print("Debe ingresar un numero de telefono valido.")
+    print("Se modificaron los datos con exito!")
 
 data = cambio("341526406956810")
 
