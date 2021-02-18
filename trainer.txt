@@ -1,9 +1,17 @@
 si,Vamos a ver las opciones!
+leer publicaciones,Copiado! Vamos a ver que posteos hay
+postear,Vamos a realizar un post!
+publicar foto,Vamos a subir una foto!
+ver seguidores,Entendido capo! Vamos a ver los seguidores
+perfil,Entendido veremos el perfil
+chau ,Hasta la proxima!
+dar like,Entonces vamos a dar like!
+modificarlo,Perfecto. Vamos a modificar un posteo
 muestra opciones,Vamos a ver las opciones!
 miremos esas opciones,Vamos a ver las opciones!
 ver opciones,Vamos a ver las opciones!
+veamos las opciones,Vamos a ver las opciones!
 opciones,Vamos a ver las opciones!
-leer publicaciones,Copiado! Vamos a ver que posteos hay
 leer posteos,Copiado! Vamos a ver que posteos hay
 ver posts,Copiado! Vamos a ver que posteos hay
 muestrame los posts,Copiado! Vamos a ver que posteos hay
@@ -12,7 +20,6 @@ publicaciones,Copiado! Vamos a ver que posteos hay
 ver publicaciones,Copiado! Vamos a ver que posteos hay
 ver posts,Copiado! Vamos a ver que posteos hay
 leer posts,Copiado! Vamos a ver que posteos hay
-dar like,Entonces vamos a dar like!
 dar me gusta,Entonces vamos a dar like!
 likear un post,Entonces vamos a dar like!
 likear publicacion,Entonces vamos a dar like!
@@ -25,27 +32,22 @@ cambiar publicacion,Perfecto. Vamos a modificar un posteo
 modificar publicacion,Perfecto. Vamos a modificar un posteo
 modificar,Perfecto. Vamos a modificar un posteo
 cambiar,Perfecto. Vamos a modificar un posteo
-postear,Vamos a realizar un post!
 hacer un post,Vamos a realizar un post!
 hacer una publicacion,Vamos a realizar un post!
 publicar,Vamos a realizar un post!
 subir un post,Vamos a realizar un post!
 subir post,Vamos a realizar un post!
 subir foto,Vamos a subir una foto!
-publicar foto,Vamos a subir una foto!
 foto,Vamos a subir una foto!
 subir imagen,Vamos a subir una foto!
 publicar imagen,Vamos a subir una foto!
 imagen,Vamos a subir una foto!
-ver seguidores,Entendido capo! Vamos a ver los seguidores
 veamos seguidores,Entendido capo! Vamos a ver los seguidores
 followers,Entendido capo! Vamos a ver los seguidores
 ver followers,Entendido capo! Vamos a ver los seguidores
 seguidores,Entendido capo! Vamos a ver los seguidores
-perfil,Entendido veremos el perfil
 mostrar perfil,Entendido veremos el perfil
 ver perfil,Entendido veremos el perfil
-chau ,Hasta la proxima!
 adios,Hasta la proxima!
 cerrar,Hasta la proxima!
 salir,Hasta la proxima!

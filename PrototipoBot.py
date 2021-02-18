@@ -36,7 +36,7 @@ def entrenamiento_bot():
     for linea_de_dialogo in texto_entrenamiento:
         linea_de_dialogo = linea_de_dialogo.rstrip("\n").split(",")
         entrenamiento.train(linea_de_dialogo)
-        if linea_de_dialogo[-1] not in respuestas_clave and len(respuestas_clave) <= 8:
+        if len(respuestas_clave) <= 8:
             respuestas_clave.append(linea_de_dialogo[-1])
     texto_entrenamiento.close()
     return respuestas_clave
@@ -51,7 +51,6 @@ def opciones_bot(usuario):
     las veces que sean falta.
     '''
     print('''
-    -Dar Like
     -Leer posteos
     -Subir posteos y fotos
     -Actualizar post
@@ -119,9 +118,7 @@ def ver_posteos(usuario, respuestas):
                 posts_id.append(post_id)
                 cantidad_post += 1
     dicc_posts = dict(posts_id)
-    finalizar_modificaciones = False
-    while finalizar_modificaciones == False:
-        finalizar_modificaiones = modificacion_posts(dicc_posts,usuario,cantidad_post,respuestas)
+    modificacion_posts(dicc_posts,usuario,cantidad_post,respuestas)
     return True
 
 def subir_posteo(usuario):
@@ -175,11 +172,11 @@ def modificacion_posts(id_posts,usuario,cantidad_post,respuestas):
         while finalizar_accion == False:
             acciones_bot("seccion5")
             selector_modificacion = mensajes(usuario)
-            if str(selector_modificacion) == respuestas[2]:
+            if str(selector_modificacion) == respuestas[7]:
                 like_posteo(id_posts[int(numero_post_elegido)])
                 acciones_bot("seccion6")
                 finalizar_accion = True
-            elif str(selector_modificacion) == respuestas[3]:
+            elif str(selector_modificacion) == respuestas[8]:
                 actualizar_post(id_posts[int(numero_post_elegido)])
                 acciones_bot("seccion6")
                 finalizar_accion = True
@@ -187,9 +184,11 @@ def modificacion_posts(id_posts,usuario,cantidad_post,respuestas):
                 acciones_bot("seccion4")
     else:
         acciones_bot("seccion3")
-        finalizar_modificaciones = True
-    return finalizar_modificaciones
-    
+        eleccion_modificacion = True
+        
+    print(eleccion_modificacion)
+    return eleccion_modificacion
+        
 def cantidad_seguidores(usuario):
     '''
     Muestra la cantidad de seguidores,likes y nombre que tiene la pagina
@@ -388,11 +387,11 @@ def conversacion(usuario,respuestas_clave):
     '''
     opciones = {0:opciones_bot,
                 1:ver_posteos,
-                4:subir_posteo,
-                5:subir_foto,
-                6:cantidad_seguidores,
-                7:actualizar_datos,
-                8:finalizar
+                2:subir_posteo,
+                3:subir_foto,
+                4:cantidad_seguidores,
+                5:actualizar_datos,
+                6:finalizar
                 }
     acciones_bot("saludo inicial")
     continuar = True
@@ -436,7 +435,7 @@ def acciones_bot(codigo_accion):
     docstring
     '''
     lectura_accion = CRUX.get_response(codigo_accion)
-    print("****************\nCrux: {0}\n***************************".format(lectura_accion))
+    print("Crux: {0}".format(lectura_accion))
     registro_log(lectura_accion,"Crux")
 
 def acciones_usuario(usuario):
@@ -445,7 +444,7 @@ def acciones_usuario(usuario):
     '''
     accion_usuario = input("{0}: ".format(usuario))
     registro_log(accion_usuario,usuario)
-    return accion_usuario
+    return accion_usuario.lower()
 
 def main():
     entrenamiento = entrenamiento_bot()
