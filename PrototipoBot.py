@@ -131,13 +131,14 @@ def subir_posteo(usuario):
     Se sube el posteo al feed de la PAGINA, y no se realizan mas cambios que ello.
     Se vuelve a la charla con el BOT.
     '''
-    texto_post = input("Que queres que diga el post: ")
+    acciones_bot("seccion7")
+    texto_post= acciones_usuario(usuario)
     post_args = {"message":texto_post,"access_token":DATOS._access_token}
     peticion = DATOS._request(
         path="v9.0/{0}/feed".format(ID_PAGINA),
         method="POST",
         post_args = post_args)
-    print("Post creado con exito!")
+    acciones_bot("seccion8")
     return True
 
 def actualizar_post(post_id):
@@ -200,7 +201,7 @@ def modificacion_posts(id_posts,usuario,cantidad_post,respuestas):
         
     print(eleccion_modificacion)
     return eleccion_modificacion
-        
+
 def cantidad_seguidores(usuario):
     '''
     Muestra la cantidad de seguidores,likes y nombre que tiene la pagina
@@ -219,7 +220,7 @@ def cantidad_seguidores(usuario):
           '''.format(data["followers_count"],data["fan_count"],data["name"]))
     return True
 
-def foto_archivo(page_id, usuario):
+def foto_archivo(page_id, usuario, accion):
     window = tk.Tk()
     window.wm_attributes('-topmost', 1)
     window.withdraw()
@@ -228,10 +229,15 @@ def foto_archivo(page_id, usuario):
         ingreso_correcto = False
         while not ingreso_correcto:
             filename = filedialog.askopenfilename()
-            print(filename[-3::])
             if filename[-3::] in archivos_soportados:
-                API_SDK.put_photo(image = open(r"{0}".format(filename),"rb"), album_path=f"{page_id}/picture")
-                ingreso_correcto = True
+                if accion == True:
+                    API_SDK.put_photo(image = open(r"{0}".format(filename),"rb"), album_path=f"{page_id}/picture")
+                    ingreso_correcto = True
+                elif accion == False:
+                    acciones_bot("cod22")
+                    API_SDK.put_photo(image = open(r"{0}".format(filename),"rb"), message = acciones_usuario(usuario))
+                    ingreso_correcto = True
+                    acciones_bot("cod14")
             else:
                 acciones_bot("cod13")
                 salir = acciones_usuario(usuario)
@@ -242,23 +248,35 @@ def foto_archivo(page_id, usuario):
     except:
         acciones_bot("cod14")
 
-def foto_url(page_id, usuario):
+def foto_url(page_id, usuario, accion):
     ingreso_correcto = False
     while not ingreso_correcto:
         try:
+            acciones_bot("cod23")
             url = acciones_usuario(usuario)
-            post_args = {"picture":url,"access_token":DATOS._access_token}
-            peticion = DATOS._request(
-                path=f"v9.0/{page_id}/picture",
-                method="POST",
-                post_args = post_args)
-            data = DATOS._parse_response(peticion)
-            print(data)
-            ingreso_correcto = True
+            if accion == True:
+                post_args = {"picture":url,"access_token":DATOS._access_token}
+                peticion = DATOS._request(
+                    path=f"v9.0/{page_id}/picture",
+                    method="POST",
+                    post_args = post_args)
+                data = DATOS._parse_response(peticion)
+                print(data)
+                ingreso_correcto = True
+            if accion == False:
+                acciones_bot("cod22")
+                mensaje = acciones_usuario(usuario)
+                post_args = {"url":url,"access_token":DATOS._access_token,"caption":mensaje}
+                peticion = DATOS._request(
+                    path=f"v9.0/{page_id}/photos",
+                    method="POST",
+                    post_args = post_args)
+                data = DATOS._parse_response(peticion)
+                ingreso_correcto = True
         except pyfacebook.error.PyFacebookException as error:
-            if "(#100) picture should represent a valid URL" == error.message:
+            if "(#100) picture should represent a valid URL" or "(#100) url should represent a valid URL "== error.message:
                 acciones_bot("cod16")
-            elif "Missing or invalid image file" == error.message:
+            elif "Missing or invalid image file" or "Invalid parameter" == error.message:
                 acciones_bot("cod17")
             else:
                 acciones_bot("cod14")
@@ -308,10 +326,9 @@ def cambiar_foto_perfil(usuario, page_id):
         opcion_2 = validacion_en_rango(1,3,usuario)
         if opcion_2 == 1:
             acciones_bot("cod12")
-            foto_archivo(page_id,usuario)
+            foto_archivo(page_id, usuario, True)
         if opcion_2 == 2:
-            acciones_bot("cod15")
-            foto_url(page_id, usuario)
+            foto_url(page_id, usuario, False)
     if opcion == 2:
         foto_ya_publicada(page_id, usuario)
     return True
@@ -385,7 +402,15 @@ def subir_foto(usuario):
     '''
     Hay que ver si se junta junto con la funcion SUBIR_POSTEO
     '''
-    print("Subir Foto")
+    acciones_bot("cod20")
+    print("1. Seleccionando archivo\n2. Mediante URL")
+    opcion = validacion_en_rango(1, 3, usuario)
+    if opcion == 1:
+        foto_archivo(ID_PAGINA, usuario, False)
+    if opcion == 2:
+        foto_url(ID_PAGINA, usuario, False)
+    acciones_bot("cod14")
+    acciones_bot("cod20")
     return True
 
 def finalizar(usuario):
