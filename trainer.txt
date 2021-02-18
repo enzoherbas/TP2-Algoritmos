@@ -3,20 +3,21 @@ muestra opciones,Vamos a ver las opciones!
 miremos esas opciones,Vamos a ver las opciones!
 ver opciones,Vamos a ver las opciones!
 opciones,Vamos a ver las opciones!
-leer publicaciones,Copiado! Vamos a ver que posteos que hay
-leer posteos,Copiado! Vamos a ver que posteos que hay
-ver posts,Copiado! Vamos a ver que posteos que hay
-muestrame los posts,Copiado! Vamos a ver que posteos que hay
-posts,Copiado! Vamos a ver que posteos que hay
-publicaciones,Copiado! Vamos a ver que posteos que hay
-ver publicaciones,Copiado! Vamos a ver que posteos que hay
-ver posts,Copiado! Vamos a ver que posteos que hay
-dar like,Entonces vamos a ver en que posteo deseas dar tu like
-dar me gusta,Entonces vamos a ver en que posteo deseas dar tu like
-likear un post,Entonces vamos a ver en que posteo deseas dar tu like
-likear publicacion,Entonces vamos a ver en que posteo deseas dar tu like
-me gusta,Entonces vamos a ver en que posteo deseas dar tu like
-like,Entonces vamos a ver en que posteo deseas dar tu like
+leer publicaciones,Copiado! Vamos a ver que posteos hay
+leer posteos,Copiado! Vamos a ver que posteos hay
+ver posts,Copiado! Vamos a ver que posteos hay
+muestrame los posts,Copiado! Vamos a ver que posteos hay
+posts,Copiado! Vamos a ver que posteos hay
+publicaciones,Copiado! Vamos a ver que posteos hay
+ver publicaciones,Copiado! Vamos a ver que posteos hay
+ver posts,Copiado! Vamos a ver que posteos hay
+leer posts,Copiado! Vamos a ver que posteos hay
+dar like,Entonces vamos a dar like!
+dar me gusta,Entonces vamos a dar like!
+likear un post,Entonces vamos a dar like!
+likear publicacion,Entonces vamos a dar like!
+me gusta,Entonces vamos a dar like!
+like,Entonces vamos a dar like!
 cambiar post,Perfecto. Vamos a modificar un posteo
 modificar post,Perfecto. Vamos a modificar un posteo
 actualizar post,Perfecto. Vamos a modificar un posteo
@@ -48,12 +49,18 @@ chau ,Hasta la proxima!
 adios,Hasta la proxima!
 cerrar,Hasta la proxima!
 salir,Hasta la proxima!
-saludo inicial, Holaaaaa! Bienvenido soy CRUX el asistente de la pagina virtual de facebook!
-hola crux,Bienvenido otra vez! Desea ver las opciones?
-hola,Bienvenido otra vez! Desea ver las opciones?
-hello,Bienvenido otra vez! Desea ver las opciones?
+saludo inicial, Bienvenido! Soy CRUX el asistente de la pagina virtual de facebook!
+hola crux,Bienvenido nuevamente! Desea ver las opciones?
+hola,Bienvenido nuevamente! Desea ver las opciones?
+hello,Bienvenido nuevamente! Desea ver las opciones?
 como estas?,Estoy bien y vos?
 bien y vos?,Estoy bien y vos?
 bien,Me alegro!Vemos opciones?
 mal,Me alegro!Vemos opciones?
+seccion1,Desea realizar alguna modificacion? Ingrese SI. En caso contrario volvera al menu
+seccion2,Que numero de post desea modificar jefe?
+seccion3,Volviendo al menu jefe!
+seccion4,Seleccion incorrecta, reingrese!
+seccion5,Desea dar un like o Modificar el post?
+seccion6,Se realizo la accion correctamente!
 
