@@ -18,6 +18,7 @@ CRUX = ChatBot("bot_10",logic_adapters=[
             'default_response': 'Disculpa, no logro entenderte. Intenta escribirlo de otra manera',
             'maximum_similarity_threshold': 0.80
         }])
+
 LOG = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\log.txt","a")
 LOG.write("\nNueva sesion\nFecha, hora, Usuario/Crux, Mensaje\n")
 
