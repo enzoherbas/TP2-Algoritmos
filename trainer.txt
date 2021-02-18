@@ -7,6 +7,8 @@ perfil,Entendido veremos el perfil
 chau ,Hasta la proxima!
 dar like,Entonces vamos a dar like!
 modificarlo,Perfecto. Vamos a modificar un posteo
+eliminar post,Entendido. Eliminaremos el post!
+eliminar,Entendido. Eliminaremos el post!
 muestra opciones,Vamos a ver las opciones!
 miremos esas opciones,Vamos a ver las opciones!
 ver opciones,Vamos a ver las opciones!

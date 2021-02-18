@@ -36,7 +36,7 @@ def entrenamiento_bot():
     for linea_de_dialogo in texto_entrenamiento:
         linea_de_dialogo = linea_de_dialogo.rstrip("\n").split(",")
         entrenamiento.train(linea_de_dialogo)
-        if len(respuestas_clave) <= 8:
+        if len(respuestas_clave) <= 9:
             respuestas_clave.append(linea_de_dialogo[-1])
     texto_entrenamiento.close()
     return respuestas_clave
@@ -152,6 +152,14 @@ def actualizar_post(post_id):
         method="POST",
         post_args = post_args)
 
+def eliminar_post(page_id):
+    args = {"method":"delete","access_token":DATOS._access_token}
+    peticion = DATOS._request(
+        path="v9.0/{0}".format(page_id),
+        post_args=args,
+        method="POST")
+    data = DATOS._parse_response(peticion)
+
 def modificacion_posts(id_posts,usuario,cantidad_post,respuestas):
     acciones_bot("seccion1")
     respuesta_usuario = input("{0}:".format(usuario)).upper()
@@ -180,6 +188,9 @@ def modificacion_posts(id_posts,usuario,cantidad_post,respuestas):
                 actualizar_post(id_posts[int(numero_post_elegido)])
                 acciones_bot("seccion6")
                 finalizar_accion = True
+            elif str(selector_modificacion) == respuestas[9]:
+                eliminar_post(id_posts[int(numero_post_elegido)])
+                acciones_bot("seccion6")
             else:
                 acciones_bot("seccion4")
     else:
