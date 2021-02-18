@@ -78,7 +78,7 @@ cod10,Elija la opcion segun corresponda:
 cod11,Dale subamos una nueva, estas son las opciones:
 cod12,Genial seleccione la imagen que quiera como foto de perfil
 cod13,El archivo elegido es incorrecto; quiere seleccionar otro? Ingrese 'si'; de lo contrario saldra:
-cod14,La foto de perfil se cambio exitosamente
+cod14,La foto se subio correctamente
 cod15,A continuacion ingrese la URL de la imagen que quiera como foto de perfil
 cod16,URL ingresado no es valido; por favor vuelva a ingresar
 cod17,URL ingresado no contiene una imagen: vuelva a ingresar
@@ -87,3 +87,8 @@ cod1,A continuacion se muestra lo que puede modificar
 cod2,Lo ingresado no es valido, por favor vuelva a intentar.
 cod19,Desea realizar otra modificaion? Ingrese 'Si' de lo contrario saldra.
 cod20,Queres volver a ver las opciones?
+cod21,De que forma subiremos la foto?
+cod22,A continuacion ingrese la descripcion de la foto
+cod23,A continuacion ingrese la URL de la imagen
+seccion7,Que deseas escribir en el post?
+seccion8,Post creado con exito!
