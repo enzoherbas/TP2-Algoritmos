@@ -82,59 +82,59 @@ def ver_posteos(usuario, respuestas):
     las modicaciones se enviaran a LIKE_POSTEO o ACTUALIZAR_POSTEO
     '''
     
-    # posts_id = []
-    # informacion_posts = DATOS.get_page_posts(page_id = ID_PAGINA,fields= "story,message,permalink_url",return_json = True,count=None)
-    # contador_posts = 1
-    # for informacion_post in informacion_posts:
-    #     if ("story") not in informacion_post:        
-    #         try:
-    #             print("N°{0} Post.\n-{1}".format(contador_posts,informacion_post["message"]))
-    #             post_id = (contador_posts,informacion_post["id"])
-    #             posts_id.append(post_id)
-    #             contador_posts += 1     
-    #         except:
-    #             print("N°{0} Post.\n-Imagen\n-Url: {1}".format(contador_posts,informacion_post["permalink_url"]))
-    #             post_id = (contador_posts,informacion_post["id"])
-    #             posts_id.append(post_id)
-    #             contador_posts += 1 
-    # dicc_posts = dict(posts_id)
-    # finalizar_modificaciones = False
-    # while finalizar_modificaciones == False:        
-    #     acciones_bot("seccion1")
-    #     respuesta_usuario = input("{0}:".format(usuario)).upper()
-    #     registro_log(respuesta_usuario,usuario)
-    #     print(respuesta_usuario)
-    #     if respuesta_usuario == "SI":
-    #         eleccion_modificacion = True
-    #         while eleccion_modificacion == True:
-    #                 acciones_bot("seccion2")
-    #                 numero_post_elegido = acciones_usuario(usuario)
-    #                 try:
-    #                     if numero_post_elegido.isnumeric and int(numero_post_elegido) < contador_posts:
-    #                         eleccion_modificacion = False
-    #                     else:
-    #                         acciones_bot("seccion4")
-    #                 except:
-    #                     acciones_bot("seccion4")               
-    #         finalizar_accion = False
-    #         while finalizar_accion == False:
-    #             acciones_bot("seccion5")
-    #             selector_modificacion = mensajes(usuario)
-    #             if str(selector_modificacion) == respuestas[2]:
-    #                 like_posteo(dicc_posts[int(numero_post_elegido)])
-    #                 acciones_bot("seccion6")
-    #                 finalizar_accion = True 
-    #             elif str(selector_modificacion) == respuestas[3]:
-    #                 actualizar_post(dicc_posts[int(numero_post_elegido)])
-    #                 acciones_bot("seccion6")
-    #                 finalizar_accion = True                   
-    #             else:
-    #                 acciones_bot("seccion4")
-    #     else:
-    #         acciones_bot("seccion3")
-    #         finalizar_modificaciones = True
+    posts_id = []
+    informacion_posts = DATOS.get_page_posts(page_id = ID_PAGINA,fields= "story,message,permalink_url",return_json = True,count=None)
+    contador_posts = 1
+    for informacion_post in informacion_posts:
+        if ("story") not in informacion_post:        
+            try:
+                print("N°{0} Post.\n-{1}".format(contador_posts,informacion_post["message"]))
+                post_id = (contador_posts,informacion_post["id"])
+                posts_id.append(post_id)
+                contador_posts += 1     
+            except:
+                print("N°{0} Post.\n-Imagen\n-Url: {1}".format(contador_posts,informacion_post["permalink_url"]))
+                post_id = (contador_posts,informacion_post["id"])
+                posts_id.append(post_id)
+                contador_posts += 1 
+    dicc_posts = dict(posts_id)
+    finalizar_modificaciones = False
+    while finalizar_modificaciones == False:        
+        acciones_bot("seccion1")
+        respuesta_usuario = input("{0}:".format(usuario)).upper()
+        registro_log(respuesta_usuario,usuario)
+        print(respuesta_usuario)
+        if respuesta_usuario == "SI":
+            eleccion_modificacion = True
+            while eleccion_modificacion == True:
+                    acciones_bot("seccion2")
+                    numero_post_elegido = acciones_usuario(usuario)
+                    try:
+                        if numero_post_elegido.isnumeric and int(numero_post_elegido) < contador_posts:
+                            eleccion_modificacion = False
+                        else:
+                            acciones_bot("seccion4")
+                    except:
+                        acciones_bot("seccion4")               
+            finalizar_accion = False
+            while finalizar_accion == False:
+                acciones_bot("seccion5")
+                selector_modificacion = mensajes(usuario)
+                if str(selector_modificacion) == respuestas[2]:
+                    like_posteo(dicc_posts[int(numero_post_elegido)])
+                    acciones_bot("seccion6")
+                    finalizar_accion = True 
+                elif str(selector_modificacion) == respuestas[3]:
+                    actualizar_post(dicc_posts[int(numero_post_elegido)])
+                    acciones_bot("seccion6")
+                    finalizar_accion = True                   
+                else:
+                    acciones_bot("seccion4")
+        else:
+            acciones_bot("seccion3")
+            finalizar_modificaciones = True
             
-    # return True
+    return True
 
 def subir_posteo(usuario):
     '''
@@ -217,7 +217,7 @@ def foto_url(page_id, usuario):
                 acciones_bot("cod14")
                 ingreso_correcto = True
 
-def listar_fotos_publicadas(page_id,usuario):
+def listar_fotos_publicadas(page_id, usuario):
     peticion = DATOS._request(path = f"v9.0/{page_id}/photos?type=uploaded", method = "GET")
     datos = DATOS._parse_response(peticion)
     lista_ids = [] 
@@ -233,7 +233,7 @@ def listar_fotos_publicadas(page_id,usuario):
     foto_seleccionada = lista_ids[opcion-1]
     return foto_seleccionada
         
-def foto_ya_publicada(page_id,usuario):
+def foto_ya_publicada(page_id, usuario):
     reuse = True
     foto = listar_fotos_publicadas(page_id,usuario)
     access_token = DATOS._access_token
@@ -241,14 +241,14 @@ def foto_ya_publicada(page_id,usuario):
     peticion = DATOS._request(path = f"v9.0/{page_id}/picture", method = "POST", post_args = post_args)
     acciones_bot("cod14")
 
-def validacion_en_rango(rango_min, rango_max,usuario):
+def validacion_en_rango(rango_min, rango_max, usuario):
     opcion = acciones_usuario(usuario)
     while not opcion.isnumeric() or int(opcion) not in range(rango_min, rango_max):
         acciones_bot("cod2")
         opcion = acciones_usuario(usuario)
     return int(opcion)
 
-def cambiar_foto_perfil(usuario,page_id):
+def cambiar_foto_perfil(usuario, page_id):
     acciones_bot("cod10")
     print("1. Subir una nueva foto de perfil\n2. Seleccionar una ya publicada")
     opcion = validacion_en_rango(1,3,usuario)
