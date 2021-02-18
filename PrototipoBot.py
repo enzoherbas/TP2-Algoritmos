@@ -16,10 +16,10 @@ CRUX = ChatBot("bot_10",logic_adapters=[
         {
             'import_path': 'chatterbot.logic.BestMatch',
             'default_response': 'Disculpa, no logro entenderte. Intenta escribirlo de otra manera',
-            'maximum_similarity_threshold': 0.80
+            'maximum_similarity_threshold': 0.85
         }])
 
-LOG = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\log.txt","a")
+LOG = open("log.txt","a")
 LOG.write("\nNueva sesion\nFecha, hora, Usuario/Crux, Mensaje\n")
 
 def entrenamiento_bot():
@@ -33,7 +33,7 @@ def entrenamiento_bot():
     fin de usarlas de frases clave para navegar dentro de las opciones del menu
     '''
     entrenamiento = ListTrainer(CRUX, show_training_progress = False)
-    texto_entrenamiento = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\trainer.txt")
+    texto_entrenamiento = open("trainer.txt")
     respuestas_clave = []
     for linea_de_dialogo in texto_entrenamiento:
         linea_de_dialogo = linea_de_dialogo.rstrip("\n").split(",")
@@ -53,7 +53,7 @@ def opciones_bot(usuario):
     las veces que sean falta.
     '''
     print('''
-    -Leer posteos
+    -Ver posteos
     -Subir posteos y fotos
     -Actualizar post
     -Cantidad de seguidores
@@ -65,12 +65,11 @@ def opciones_bot(usuario):
 def like_posteo(post_id):
     '''
     PRE:
-    Se ingresa mediante la funcion de "VER_POSTEOS" para con el ID enviado, se puede elegir el
-    post a modificar.
+    Se ingresa mediante la funcion de "modificacion_post" para con el ID enviado, se puede elegir el
+    post a modificar. Con el ID recibido se genera la peticion que va realizar el posteo del Like
+    al posteo deseado.
     POST:
-    Con el ID recibido se genera la peticion que va realizar el posteo del Like al posteo
-    deseado, se volvera al menu previo, el cual es el de "VER_POSTEOS" para poder seguir
-    realizando acciones.
+    No devuelve nada, desde aca se genera toda la peticion necesaria.
     '''
     post_args = {"access_token":DATOS._access_token}
     peticion = DATOS._request(
@@ -87,7 +86,8 @@ def ver_posteos(usuario, respuestas):
     son aptos para modificaciones.
     POST:
     Se envia los datos recolectados como el ID de cada publicacion, con el fin de poder realizar la
-    modificacion. En este caso las modicaciones se enviaran a LIKE_POSTEO o ACTUALIZAR_POSTEO
+    modificacion. En este caso las modicaciones se enviaran a "modificacion_posts" para seguir con las
+    ordenes de modificacion
     '''
     posts_id = []
     informacion_posts = DATOS.get_page_posts(
@@ -127,7 +127,7 @@ def subir_posteo(usuario):
     '''
     PRE:
     Se ingresa mediante la conversacion con el bot, desde aca podremos realizar
-    una creacion de post. Que sea unicamente de texto, una foto o una foto con texto.
+    una creacion de post. Que sea unicamente de texto.
     POST:
     Se sube el posteo al feed de la PAGINA, y no se realizan mas cambios que ello.
     Se vuelve a la charla con el BOT.
@@ -145,7 +145,7 @@ def subir_posteo(usuario):
 def actualizar_post(post_id):
     '''
     PRE:
-    Se adquiere el ID del post a actualizar mediante la funcion VER_POSTEOS. Se le ingresara un
+    Se adquiere el ID del post a actualizar mediante la funcion "modifacion_posts". Se le ingresara un
     nuevo texto al posteo elegido
     '''
     modificacion_mensaje = input("Ingrese el nuevo texto del post: ")
@@ -155,15 +155,27 @@ def actualizar_post(post_id):
         method="POST",
         post_args = post_args)
 
-def eliminar_post(page_id):
+def eliminar_post(post_id):
+    '''
+    PRE: Se abre desde la funcion "modificacion_posts", para poder eliminar el post seleccionado.
+    '''
     args = {"method":"delete","access_token":DATOS._access_token}
     peticion = DATOS._request(
-        path="v9.0/{0}".format(page_id),
+        path="v9.0/{0}".format(post_id),
         post_args=args,
         method="POST")
     data = DATOS._parse_response(peticion)
 
 def modificacion_posts(id_posts,usuario,cantidad_post,respuestas):
+    '''
+    PRE: Se ingresan los id_posts para poder realizar la modificacion deseada mediante la charla
+    con el bot y una parte con el sistema para evitar errores con la palabra de afirmacion. la
+    cantidad de posts tambien para corroborar que la eleccion de post a modificar este dentro de
+    los rangos de eleccion, las "respuestas" ingresan con el fin de corroborar que la respuesta
+    del bot sea la deseada e ingrese a las funciones "like_post", "actualizar_post" o "eliminar_post"
+    POST: Retora a la opcion anterior de "VER_POSTEOS" para verificar si desea seguir con las
+    modificaciones.
+    '''
     acciones_bot("seccion1")
     respuesta_usuario = input("{0}:".format(usuario)).upper()
     registro_log(respuesta_usuario,usuario)
@@ -205,6 +217,7 @@ def modificacion_posts(id_posts,usuario,cantidad_post,respuestas):
 
 def cantidad_seguidores(usuario):
     '''
+    PRE:
     Muestra la cantidad de seguidores,likes y nombre que tiene la pagina
     '''
     argumentos_get = {"fields" : "followers_count,fan_count,name"}
@@ -213,12 +226,14 @@ def cantidad_seguidores(usuario):
         args=argumentos_get,
         method="GET")
     data = DATOS._parse_response(peticion)
-    print('''
+    estadisticas_pagina = ('''
           La cantidad de personas que interactuan con la pagina "{2}"
           son 
           {0} Followers 
           {1} Likes en la pagina
           '''.format(data["followers_count"],data["fan_count"],data["name"]))
+    print("Crux: {}".format(estadisticas_pagina))
+    registro_log(estadisticas_pagina,"Crux")
     return True
 
 def foto_archivo(page_id, usuario, accion):
@@ -446,14 +461,18 @@ def conversacion(usuario,respuestas_clave):
         respuesta_bot = mensajes(usuario)
         if str(respuesta_bot) in respuestas_clave:
             indice_respuesta = respuestas_clave.index(str(respuesta_bot))
-            if indice_respuesta is 1:
-                continuar = opciones[indice_respuesta](usuario,respuestas_clave)
-            else:
+            if indice_respuesta in range (2,7) or indice_respuesta is 0:
                 continuar = opciones[indice_respuesta](usuario)
-
+            elif indice_respuesta is 1:
+                continuar = opciones[indice_respuesta](usuario,respuestas_clave)
+            
 def registro_log (dialogo,usuario):
     '''
-    DOcstrig
+    PRE:
+    Ingresa el dialogo junto al usuario para poder ingresarlo al log en forma de dialogo
+    con el dia y hora del momento del mensaje.
+    POST:
+    Devuelve el archivo LOG con las nuevas modificaciones.
     '''
     hora_actual = datetime.now()
     dialogo_log = str("{0} {1}:{2}:{3} {4} : {5}".format(
@@ -467,7 +486,13 @@ def registro_log (dialogo,usuario):
 
 def mensajes(usuario):
     '''
-    docstring
+    PRE:
+    Se ingresan los datos del usuario para poder registrarlo en el LOG, se genera una conversacion
+    de respuesta con el bot 
+    POST:
+    El bot devuelve una respuesta, que abrira o no una funcion con respecto en donde se use. Se
+    comparara esa respuesta en la lista de palabras claves para ver si esta en ellas esa respuesta
+    otorgada.
     '''
     peticion = input("{0}:".format(usuario))
     registro_log(peticion,usuario)
@@ -479,7 +504,11 @@ def mensajes(usuario):
 
 def acciones_bot(codigo_accion):
     '''
-    docstring
+    PRE:
+    Se ingresa un "codigo_accion" que no es mas que una cadena de texto que esta diseñada para
+    poder abrir una funcion en especifico, se utilizara a lo largo del programa
+    POST:
+    Printea la respuesta del bot con respecto a ese "codigo_accion" y se guardara en el LOG
     '''
     lectura_accion = CRUX.get_response(codigo_accion)
     print("Crux: {0}".format(lectura_accion))
@@ -487,7 +516,12 @@ def acciones_bot(codigo_accion):
 
 def acciones_usuario(usuario):
     '''
-    docstring
+    PRE:
+    Se ingresa el usuario para generar un dialogo del USUARIO en distintas instancias del
+    funcionamiento del programa.
+    POST:
+    Retorna esa accion del usuario que sera leida por el bot y generara una respuesta
+    tambien el dialogo se guardara en el LOG
     '''
     accion_usuario = input("{0}: ".format(usuario))
     registro_log(accion_usuario,usuario)
