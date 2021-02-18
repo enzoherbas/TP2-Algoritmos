@@ -19,7 +19,7 @@ CRUX = ChatBot("bot_10",logic_adapters=[
             'maximum_similarity_threshold': 0.80
         }])
 LOG = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\log.txt","a")
-LOG.write("\nNueva sesion\n")
+LOG.write("\nNueva sesion\nNueva sesion\nFecha, hora, Usuario/Crux, Mensaje\n")
 
 def entrenamiento_bot():
     '''
@@ -31,7 +31,7 @@ def entrenamiento_bot():
     Las respuestas seras guardadas dentro de una lista llamada "respuestas" con el
     fin de usarlas de frases clave para navegar dentro de las opciones del menu
     '''
-    entrenamiento = ListTrainer(CRUX)
+    entrenamiento = ListTrainer(CRUX, show_training_progress = False)
     texto_entrenamiento = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\trainer.txt")
     respuestas_clave = []
     for linea_de_dialogo in texto_entrenamiento:

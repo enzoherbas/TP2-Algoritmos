@@ -92,3 +92,6 @@ cod22,A continuacion ingrese la descripcion de la foto
 cod23,A continuacion ingrese la URL de la imagen
 seccion7,Que deseas escribir en el post?
 seccion8,Post creado con exito!
+actualizar perfil,Entendido veremos el perfil
+actualizar datos,Entendido veremos el perfil
+cambiar foto de perfil,Entendido veremos el perfil
