@@ -403,7 +403,7 @@ def subir_foto(usuario):
     '''
     Hay que ver si se junta junto con la funcion SUBIR_POSTEO
     '''
-    acciones_bot("cod20")
+    acciones_bot("cod21")
     print("1. Seleccionando archivo\n2. Mediante URL")
     opcion = validacion_en_rango(1, 3, usuario)
     if opcion == 1:
@@ -441,6 +441,7 @@ def conversacion(usuario,respuestas_clave):
                 6:finalizar
                 }
     acciones_bot("saludo inicial")
+    
     continuar = True
     while continuar == True:
         respuesta_bot = mensajes(usuario)

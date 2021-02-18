@@ -54,9 +54,9 @@ adios,Hasta la proxima!
 cerrar,Hasta la proxima!
 salir,Hasta la proxima!
 saludo inicial, Bienvenido! Soy CRUX el asistente de la pagina virtual de facebook!
-hola crux,Bienvenido nuevamente! Desea ver las opciones?
-hola,Bienvenido nuevamente! Desea ver las opciones?
-hello,Bienvenido nuevamente! Desea ver las opciones?
+hola crux,Holaaaa! Desea ver las opciones?
+hola,Holaaaaa! Desea ver las opciones?
+hello,hello! Desea ver las opciones?
 como estas?,Estoy bien y vos?
 bien y vos?,Estoy bien y vos?
 bien,Me alegro!Vemos opciones?
@@ -95,3 +95,4 @@ seccion8,Post creado con exito!
 actualizar perfil,Entendido veremos el perfil
 actualizar datos,Entendido veremos el perfil
 cambiar foto de perfil,Entendido veremos el perfil
+no,Okay; Que queres hacer?
