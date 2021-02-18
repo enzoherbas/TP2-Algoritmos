@@ -19,7 +19,7 @@ CRUX = ChatBot("bot_10",logic_adapters=[
             'maximum_similarity_threshold': 0.80
         }])
 LOG = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\log.txt","a")
-LOG.write("\nNueva sesion\nNueva sesion\nFecha, hora, Usuario/Crux, Mensaje\n")
+LOG.write("\nNueva sesion\nFecha, hora, Usuario/Crux, Mensaje\n")
 
 def entrenamiento_bot():
     '''
