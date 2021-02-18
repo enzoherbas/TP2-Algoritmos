@@ -16,9 +16,10 @@ CRUX = ChatBot("bot_10",logic_adapters=[
         {
             'import_path': 'chatterbot.logic.BestMatch',
             'default_response': 'Disculpa, no logro entenderte. Intenta escribirlo de otra manera',
-            'maximum_similarity_threshold': 0.90
+            'maximum_similarity_threshold': 0.80
         }])
-LOG = open("log.txt","w")
+LOG = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\log.txt","a")
+LOG.write("\nNueva sesion\n")
 
 def entrenamiento_bot():
     '''
@@ -31,7 +32,7 @@ def entrenamiento_bot():
     fin de usarlas de frases clave para navegar dentro de las opciones del menu
     '''
     entrenamiento = ListTrainer(CRUX)
-    texto_entrenamiento = open("trainer.txt")
+    texto_entrenamiento = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\trainer.txt")
     respuestas_clave = []
     for linea_de_dialogo in texto_entrenamiento:
         linea_de_dialogo = linea_de_dialogo.rstrip("\n").split(",")
@@ -350,6 +351,9 @@ def actualizar_datos(usuario):
 
         while continuar == False:
             try:
+                peticion_2 = DATOS._request(f"v9.0/{ID_PAGINA}?fields={cambios[opcion][1]}", method = "GET")
+                data_2 = DATOS._parse_response(peticion_2)
+                print(f"Su {cambios[opcion][0]} actual es: {data_2[cambios[opcion][1]]}")
                 cambio = input(f"Ingrese su nuevo/a {cambios[opcion][0]}: ".capitalize())
                 registro_log(cambio,usuario)
                 if opcion == 2:
@@ -367,8 +371,14 @@ def actualizar_datos(usuario):
                     acciones_bot("cod6")
                 else:
                     acciones_bot("cod7")
-
-        finalizar = True
+        acciones_bot("cod19")
+        decision = acciones_usuario(usuario)
+        if decision == "si":
+            finalizar = False
+            continuar = False
+        else:
+            finalizar = True
+            acciones_bot("cod20")
     return True
 
 def subir_foto(usuario):
