@@ -8,6 +8,7 @@ import facebook
 import pyfacebook
 import tkinter as tk
 from tkinter import filedialog
+from colorama import init, Fore, Back, Style
 
 DATOS = Api(app_id = "692001264799472",app_secret = "60b272a45b500fef45f3c930d5d6d8df",long_term_token = "EAAJ1XxmSjvABAIVSXdbeDkCVQuewmUMOs8ZClysBW8NWZBMx3zGR2wN3EWZBUwjlUfSh2NF7jDztlXSALCal8VYjGZAd69wZA0xd5XUBJpB6YY3bcZC1SZBV7juZCpnBHHdc8X6ZBN1O6CjAZBt9nWPZC4BY1v0KJfRGkhpRvXjiaZA1oPS90vt6HJcRIynEvxDadJsZD",)
 API_SDK = facebook.GraphAPI("EAAJ1XxmSjvABAIVSXdbeDkCVQuewmUMOs8ZClysBW8NWZBMx3zGR2wN3EWZBUwjlUfSh2NF7jDztlXSALCal8VYjGZAd69wZA0xd5XUBJpB6YY3bcZC1SZBV7juZCpnBHHdc8X6ZBN1O6CjAZBt9nWPZC4BY1v0KJfRGkhpRvXjiaZA1oPS90vt6HJcRIynEvxDadJsZD")
@@ -23,6 +24,71 @@ LOG = open("log.txt","a")
 LOG.write("\nNueva sesion\nFecha, hora, Usuario/Crux, Mensaje\n")
 
 def entrenamiento_bot():
+    print(Back.WHITE+Fore.BLACK+
+    '''
+    BIENVENIDOS AL TRABAJO PRACTICO DEL GRANDIOSO GRUPO 2!
+    Integrantes: 
+    Tomas "El Mago" Corsico
+    Enzo "El Magnifico" Herbas 
+    '''
+    +Back.RESET+Back.LIGHTBLUE_EX+Fore.WHITE+
+    "Trabajo practico: CRUX, EL ROBOT QUE QUERIA APRENDER A AMAR"
+    +Back.RESET+Fore.WHITE+
+    '''
+    CRUX es un bot que hara uso remoto de una pagina de Facebook, mediante dialogos ingresados 
+    por el usuario, se podran realizar distintos tipos de acciones como las siguientes a mencionar:
+    '''
+    +Fore.BLUE+
+    '''
+    -Ver posts del feed de la pagina, donde se veran el texto que tengan o en el caso de que
+     sea una foto, se podra oberservar un aviso que es una foto y una URL para accer a verla
+    -Dar Like y Modificar posts del feed (Se ingresara mediante la funcion de ver posts),
+     se debera ingresar un numero de post, previamente indicado, para accionar sobre el mismo
+    -Crear un post de unicamente Texto
+    -Subir una foto sola o con una descripcion, los tipos de archivos soportados son:
+    [Tomi pone los archivos sopotados]
+    -Medir la cantidad de seguidores y likes que tiene la pagina, junto con el nombre de la misma
+    -Actualizar datos del perfil: Telefono, email, correo electronico y foto de perfil. El
+     programa detectara si son aptos, en el caso contrario se deberan volver a ingresar.
+    -Finalizar programa, mediante una despedida.
+    '''
+    +Fore.WHITE+
+    '''
+    Como tiene grandes capacidades, tambien hay que tener cuidado en ciertos aspectos:
+    '''
+    +Fore.RED+
+    '''
+    *Al ser un bebe bot, no esta del todo acostumbrado a largas frases otorgadas por el usuario
+     por ello mismo, suele confundirse al ingresar largas cadenas de texto o peticiones
+    *No se pudieron conseguir ciertos puntos solicitados, por el tema de los permisos que otorga
+     Facebook actualmente, entre ellas estan : BUSCAR USUARIOS, LISTAR AMIGOS Y SEGUIDORES, SEGUIR
+     USUARIO O SOLICITAR AMISTAD, ENVIAR MENSAJE A UN USUARIO
+    *Se intento cubrir todo tipo de errores posibles, como el uso del TOKEN DE ACCESO, el cual dura
+     unicamente 2 meses como mucho. Para encontrar otro token de acceso, comunicarse con el soporte
+    '''
+    +Fore.WHITE+
+    '''
+    Para el correcto uso de CRUX, se recomienda seguir los siguientes consejos:
+    '''
+    +Fore.GREEN+
+    '''
+    #Como se menciono previamente, CRUX no se lleva bien con largas frases o dialogos complejos,
+     por eso mismo se recomienda una diccion en lo posible lo mas sencilla y directa posible para
+     su correcto funcionamiento!
+    #Aca les dejamos una lista de archivos soportados para la subida de imagenes: [TOMI ACA PA]
+    #Nuestro Lil CRUX a veces se atolondra y no da buenas respuestas y al ser el programa manejado
+     por el, suele tirar para cualquier lado, les pedimos paciencia y que reinicie el programa.
+     Crux es un bebe, todos fuimos bebes o lo seguimos siendo en algunos casos.
+    #Si aun asi los errores perstisten, se recomienda encarecidamente borra el archivo que se generar
+     en la carpeta del programa el cual se llama "db.sqlite3", el cual es como un registro de memoria
+     de CRUX, con ello se reiniciara y podra dar un mejor funcionamiento.
+    '''
+    +Fore.WHITE+
+    '''
+    Sin mas preambulos, los dejamos con el programa. Esperamos que lo disfruten!
+    Saludos de parte de Enzo y Tomi!
+    ''')
+    
     '''
     PRE:
     Se entrenara al bot mediante las librerias de CHATTERBOT, se abre el archivo de
@@ -54,7 +120,8 @@ def opciones_bot(usuario):
     '''
     print('''
     -Ver posteos
-    -Subir posteos y fotos
+    -Subir foto
+    -Subir posteo
     -Actualizar post
     -Cantidad de seguidores
     -Actualizar datos del perfil
