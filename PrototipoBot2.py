@@ -17,7 +17,7 @@ ID_PAGINA = "341526406956810"
 
 def entrenamiento_bot(crux_bot):
     entrenamiento = ListTrainer(crux_bot, show_training_progress=False)
-    texto_entrenamiento = open("trainer.txt", "r")
+    texto_entrenamiento = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\trainer.txt", "r")
     respuestas_clave = []
     for linea_de_dialogo in texto_entrenamiento:
         linea_de_dialogo = linea_de_dialogo.rstrip("\n").split(",")
@@ -208,7 +208,7 @@ def modificacion_posts(id_posts, usuario, cantidad_post, respuestas, datos_usuar
             acciones_bot("seccion6", crux_bot, log)
             finalizar_accion = True
         else:
-            acciones_bot("seccion4", crux_bot, log)
+            acciones_bot("cod26", crux_bot, log)
 
 
 def cantidad_seguidores(usuario, datos_usuario, log):
@@ -588,7 +588,7 @@ def datos():
             'default_response': 'Disculpa, no logro entenderte. Intenta escribirlo de otra manera',
             'maximum_similarity_threshold': 0.30
         }])
-    log = open("log.txt", "a")
+    log = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\log.txt", "a")
     log.write("\nNueva sesion\nFecha, hora, Usuario/Crux, Mensaje\n")
     conexion = verificar_conexion()
 
@@ -693,7 +693,9 @@ def main():
         entrenamiento = entrenamiento_bot(crux_bot)
         charla = conversacion(nombre_usuario, datos_api, datos_api_sdk, crux_bot, entrenamiento, log)
     else:
-        print("No hay conexion a internet. Establezca una conexion y vuelva a ejecutar el programa.")
+        error = "No hay conexion a internet. Establezca una conexion y vuelva a ejecutar el programa."
+        print(error)
+        registro_log(error, "Sistema", log)
     log.close()
 
 

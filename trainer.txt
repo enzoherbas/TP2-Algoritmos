@@ -105,3 +105,4 @@ vamos a realizar un post,Vamos a realizar un post!
 seccion9,Desea continuar?
 seccion11,Quiere seguir realizando modificaciones? Ingrese "Si" de lo contrario saldra
 seccion12,Nos encontramos en el menu principal
+cod26,Mmm todavia no; primero terminemos con esto
