@@ -168,13 +168,15 @@ def eliminar_post(post_id, datos_usuario):
 
 def modificacion_posts(id_posts, usuario, cantidad_post, respuestas, datos_usuario, crux_bot, log):
     '''
-    PRE: Se ingresan los id_posts para poder realizar la modificacion deseada mediante la charla
-    con el bot y una parte con el sistema para evitar errores con la palabra de afirmacion. la
-    cantidad de posts tambien para corroborar que la eleccion de post a modificar este dentro de
-    los rangos de eleccion, las "respuestas" ingresan con el fin de corroborar que la respuesta
-    del bot sea la deseada e ingrese a las funciones "like_post", "actualizar_post" o "eliminar_post"
-    POST: Retora a la opcion anterior de "VER_POSTEOS" para verificar si desea seguir con las
-    modificaciones.
+    PRE: Se ingresan los id_posts para poder realizar la modificacion
+    deseada mediante la charlacon el bot y una parte con el sistema para
+    evitar errores con la palabra de afirmacion. lacantidad de posts tambien
+    para corroborar que la eleccion de post a modificar este dentro de los
+    rangos de eleccion, las "respuestas" ingresan con el fin de corroborar que
+    la respuesta del bot sea la deseada e ingrese a las funciones "like_post",
+    "actualizar_post" o "eliminar_post"
+    POST: Retora a la opcion anterior de "VER_POSTEOS" para verificar si desea
+    seguir con las modificaciones.
     '''
     acciones_bot("seccion2", crux_bot, log)
     numero_post_elegido = acciones_usuario(usuario, log)
@@ -202,7 +204,7 @@ def modificacion_posts(id_posts, usuario, cantidad_post, respuestas, datos_usuar
             acciones_bot("seccion4", crux_bot, log)
 
 
-def cantidad_seguidores(usuario, datos_usuario, og):
+def cantidad_seguidores(usuario, datos_usuario, log):
     '''
     PRE:
     Muestra la cantidad de seguidores,likes y nombre que tiene la pagina
@@ -258,7 +260,9 @@ def foto_url(usuario, accion, datos_usuario, crux_bot, log):
             acciones_bot("cod23", crux_bot, log)
             url = acciones_usuario(usuario, log)
             if accion is True:
-                post_args = {"picture": url, "access_token": datos_usuario._access_token}
+                post_args = {
+                    "picture": url,
+                    "access_token": datos_usuario._access_token}
                 peticion = datos_usuario._request(
                     path=f"v9.0/{ID_PAGINA}/picture",
                     method="POST",
@@ -269,7 +273,10 @@ def foto_url(usuario, accion, datos_usuario, crux_bot, log):
             if not accion:
                 acciones_bot("cod22", crux_bot, log)
                 mensaje = acciones_usuario(usuario, log)
-                post_args = {"url": url, "access_token": datos_usuario._access_token, "caption": mensaje}
+                post_args = {
+                    "url": url,
+                    "access_token": datos_usuario._access_token,
+                    "caption": mensaje}
                 peticion = datos_usuario._request(
                     path=f"v9.0/{ID_PAGINA}/photos",
                     method="POST",
@@ -287,13 +294,17 @@ def foto_url(usuario, accion, datos_usuario, crux_bot, log):
 
 
 def listar_fotos_publicadas(usuario, datos_usuario, crux_bot, log):
-    peticion = datos_usuario._request(path=f"v9.0/{ID_PAGINA}/photos?type=uploaded", method="GET")
+    peticion = datos_usuario._request(
+        path=f"v9.0/{ID_PAGINA}/photos?type=uploaded",
+        method="GET")
     datos = datos_usuario._parse_response(peticion)
     lista_ids = []
     for ids in datos["data"]:
         lista_ids.append(ids["id"])
     for ids in lista_ids:
-        peticion_2 = datos_usuario._request(path=f"v9.0/{ids}?fields=link,album", method="GET")
+        peticion_2 = datos_usuario._request(
+            path=f"v9.0/{ids}?fields=link,album",
+            method="GET")
         datos_2 = datos_usuario._parse_response(peticion_2)
         nro = lista_ids.index(ids) + 1
         print(nro, datos_2["link"], datos_2["album"]["name"])
@@ -370,12 +381,19 @@ def actualizar_datos(usuario, datos_api_sdk, datos_usuario, crux_bot, log):
             acciones_bot("cod5", crux_bot, log)
         elif opcion == 4:
             acciones_bot("cod9", crux_bot, log)
-            cambiar_foto_perfil(usuario, datos_api_sdk, datos_usuario, crux_bot, log)
+            cambiar_foto_perfil(
+                usuario,
+                datos_api_sdk,
+                datos_usuario,
+                crux_bot,
+                log)
             continuar = True
 
         while not continuar:
             try:
-                peticion_2 = datos_usuario._request(f"v9.0/{ID_PAGINA}?fields={cambios[opcion][1]}", method="GET")
+                peticion_2 = datos_usuario._request(
+                    f"v9.0/{ID_PAGINA}?fields={cambios[opcion][1]}",
+                    method="GET")
                 data_2 = datos_usuario._parse_response(peticion_2)
                 print(f"Su {cambios[opcion][0]} actual es: {data_2[cambios[opcion][1]]}")
                 cambio = input(f"Ingrese su nuevo/a {cambios[opcion][0]}: ".capitalize())
@@ -395,7 +413,7 @@ def actualizar_datos(usuario, datos_api_sdk, datos_usuario, crux_bot, log):
                     acciones_bot("cod6", crux_bot, log)
                 else:
                     acciones_bot("cod7", crux_bot, log)
-        acciones_bot("cod19", crux_bot, og)
+        acciones_bot("cod19", crux_bot, log)
         decision = acciones_usuario(usuario, log)
         if decision == "si":
             finalizar = False
@@ -423,12 +441,13 @@ def subir_foto(usuario, datos_api_sdk, datos_usuario, crux_bot, log):
 def conversacion(usuario, datos_api, datos_api_sdk, crux_bot, respuestas_clave, log):
     '''
     PRE:
-    Toma el nombre del usuario y las respuestas previamente guardadas del entrenamiento
-    de crux en ENTRENAMIENTO_BOT. Se generara una charla con el nombre del usuario y del bot.
+    Toma el nombre del usuario y las respuestas previamente guardadas del
+    entrenamiento de crux en ENTRENAMIENTO_BOT. Se generara una charla con
+    el nombre del usuario y del bot.
     POST:
-    Se redirecciona a las distintas funciones y a medida que ocurre se generan los cambios
-    en el LOG. La charla continua hasta que el usuario decida Finalizarla mediante la
-    conversacion con el bot
+    Se redirecciona a las distintas funciones y a medida que ocurre se generan
+    los cambiosm en el LOG. La charla continua hasta que el usuario decida
+    Finalizarla mediante la conversacion con el bot
     '''
     acciones_bot("saludo inicial", crux_bot, log)
     continuar = True
@@ -440,7 +459,14 @@ def conversacion(usuario, datos_api, datos_api_sdk, crux_bot, respuestas_clave, 
                 print("Adios{}".format(usuario))
                 continuar = False
             else:
-                selector_funciones(indice_respuesta, usuario, datos_api, datos_api_sdk, crux_bot, respuestas_clave, log)
+                selector_funciones(
+                    indice_respuesta,
+                    usuario,
+                    datos_api,
+                    datos_api_sdk,
+                    crux_bot,
+                    respuestas_clave,
+                    log)
 
 
 def selector_funciones(indice_respuesta, usuario, datos_api, datos_api_sdk, crux_bot, respuestas_clave, log):
@@ -468,8 +494,8 @@ def selector_funciones(indice_respuesta, usuario, datos_api, datos_api_sdk, crux
 def registro_log(dialogo, usuario, log):
     '''
     PRE:
-    Ingresa el dialogo junto al usuario para poder ingresarlo al log en forma de dialogo
-    con el dia y hora del momento del mensaje.
+    Ingresa el dialogo junto al usuario para poder ingresarlo al log en forma
+    de dialogo con el dia y hora del momento del mensaje.
     POST:
     Devuelve el archivo LOG con las nuevas modificaciones.
     '''
@@ -487,12 +513,12 @@ def registro_log(dialogo, usuario, log):
 def mensajes(usuario, crux_bot, log):
     '''
     PRE:
-    Se ingresan los datos del usuario para poder registrarlo en el LOG, se genera una conversacion
-    de respuesta con el bot
+    Se ingresan los datos del usuario para poder registrarlo en el LOG, se
+    genera una conversacion de respuesta con el bot
     POST:
-    El bot devuelve una respuesta, que abrira o no una funcion con respecto en donde se use. Se
-    comparara esa respuesta en la lista de palabras claves para ver si esta en ellas esa respuesta
-    otorgada.
+    El bot devuelve una respuesta, que abrira o no una funcion con respecto en
+    donde se use. Se comparara esa respuesta en la lista de palabras claves
+    para ver si esta en ellas esa respuesta otorgada.
     '''
     peticion = input("{0}:".format(usuario))
     registro_log(peticion, usuario, log)
@@ -511,10 +537,12 @@ def mensajes(usuario, crux_bot, log):
 def acciones_bot(codigo_accion, crux_bot, log):
     '''
     PRE:
-    Se ingresa un "codigo_accion" que no es mas que una cadena de texto que esta diseñada para
-    poder abrir una funcion en especifico, se utilizara a lo largo del programa
+    Se ingresa un "codigo_accion" que no es mas que una cadena de texto que
+    esta diseñada para poder abrir una funcion en especifico, se utilizara a
+    lo largo del programa
     POST:
-    Printea la respuesta del bot con respecto a ese "codigo_accion" y se guardara en el LOG
+    Printea la respuesta del bot con respecto a ese "codigo_accion" y se
+    guardara en el LOG
     '''
     lectura_accion = crux_bot.get_response(codigo_accion)
     print("Crux: {0}".format(lectura_accion))
@@ -524,11 +552,11 @@ def acciones_bot(codigo_accion, crux_bot, log):
 def acciones_usuario(usuario, log):
     '''
     PRE:
-    Se ingresa el usuario para generar un dialogo del USUARIO en distintas instancias del
-    funcionamiento del programa.
+    Se ingresa el usuario para generar un dialogo del USUARIO en distintas
+    instancias del funcionamiento del programa.
     POST:
-    Retorna esa accion del usuario que sera leida por el bot y generara una respuesta
-    tambien el dialogo se guardara en el LOG
+    Retorna esa accion del usuario que sera leida por el bot y generara una
+    respuesta tambien el dialogo se guardara en el LOG
     '''
     accion_usuario = input("{0}: ".format(usuario))
     registro_log(accion_usuario, usuario, log)
@@ -539,11 +567,11 @@ def datos():
     nombre_usuario = input("Por favor, ingrese su usuario: ")
     datos_api = Api(app_id="692001264799472", app_secret="60b272a45b500fef45f3c930d5d6d8df", long_term_token="EAAJ1XxmSjvABAIVSXdbeDkCVQuewmUMOs8ZClysBW8NWZBMx3zGR2wN3EWZBUwjlUfSh2NF7jDztlXSALCal8VYjGZAd69wZA0xd5XUBJpB6YY3bcZC1SZBV7juZCpnBHHdc8X6ZBN1O6CjAZBt9nWPZC4BY1v0KJfRGkhpRvXjiaZA1oPS90vt6HJcRIynEvxDadJsZD",)
     datos_api_sdk = facebook.GraphAPI("EAAJ1XxmSjvABAIVSXdbeDkCVQuewmUMOs8ZClysBW8NWZBMx3zGR2wN3EWZBUwjlUfSh2NF7jDztlXSALCal8VYjGZAd69wZA0xd5XUBJpB6YY3bcZC1SZBV7juZCpnBHHdc8X6ZBN1O6CjAZBt9nWPZC4BY1v0KJfRGkhpRvXjiaZA1oPS90vt6HJcRIynEvxDadJsZD")
-    crux_bot = ChatBot("bot_10", logic_adapters=[
+    crux_bot = ChatBot("CRUX", logic_adapters=[
         {
             'import_path': 'chatterbot.logic.BestMatch',
             'default_response': 'Disculpa, no logro entenderte. Intenta escribirlo de otra manera',
-            'maximum_similarity_threshold': 0.85
+            'maximum_similarity_threshold': 0.70
         }])
     log = open("log.txt", "a")
     log.write("\nNueva sesion\nFecha, hora, Usuario/Crux, Mensaje\n")
@@ -552,7 +580,7 @@ def datos():
 
 
 def informacion_inicial():
-    print(Back.WHITE + Fore.BLACK +
+    print(Fore.BLACK +
     '''
     BIENVENIDOS AL TRABAJO PRACTICO DEL GRANDIOSO GRUPO 2!
     Integrantes:
@@ -563,36 +591,45 @@ def informacion_inicial():
     "Trabajo practico: CRUX, EL ROBOT QUE QUERIA APRENDER A AMAR"
     + Back.RESET + Fore.WHITE +
     '''
-    CRUX es un bot que hara uso remoto de una pagina de Facebook, mediante dialogos ingresados
-    por el usuario, se podran realizar distintos tipos de acciones como las siguientes a mencionar:
+    CRUX es un bot que hara uso remoto de una pagina de Facebook, mediante
+    dialogos ingresados por el usuario, se podran realizar distintos tipos de
+    acciones como las siguientes a mencionar:
     '''
     + Fore.BLUE +
     '''
-    -Ver posts del feed de la pagina, donde se veran el texto que tengan o en el caso de que
-     sea una foto, se podra oberservar un aviso que es una foto y una URL para accer a verla
-    -Dar Like y Modificar posts del feed (Se ingresara mediante la funcion de ver posts),
-     se debera ingresar un numero de post, previamente indicado, para accionar sobre el mismo
+    -Ver posts del feed de la pagina, donde se veran el texto que tengan o en
+     el caso de que sea una foto, se podra oberservar un aviso que es una foto
+     y una URL para accer a verla
+    -Dar Like y Modificar posts del feed (Se ingresara mediante la funcion de
+     ver posts),se debera ingresar un numero de post, previamente indicado,
+     para accionar sobre el mismo
     -Crear un post de unicamente Texto
-    -Subir una foto sola o con una descripcion, los tipos de archivos soportados son:
-    [Tomi pone los archivos sopotados]
-    -Medir la cantidad de seguidores y likes que tiene la pagina, junto con el nombre de la misma
-    -Actualizar datos del perfil: Telefono, email, correo electronico y foto de perfil. El
-     programa detectara si son aptos, en el caso contrario se deberan volver a ingresar.
+    -Subir una foto sola o con una descripcion, los tipos de archivos
+     soportados son:[Tomi pone los archivos sopotados]
+    -Medir la cantidad de seguidores y likes que tiene la pagina, junto con el
+     nombre de la misma
+    -Actualizar datos del perfil: Telefono, email, correo electronico y foto
+     de perfil. El programa detectara si son aptos, en el caso contrario se
+     deberan volver a ingresar.
     -Finalizar programa, mediante una despedida.
     '''
     + Fore.WHITE +
     '''
-    Como tiene grandes capacidades, tambien hay que tener cuidado en ciertos aspectos:
+    Como tiene grandes capacidades, tambien hay que tener cuidado en ciertos
+    aspectos:
     '''
     + Fore.RED +
     '''
-    *Al ser un bebe bot, no esta del todo acostumbrado a largas frases otorgadas por el usuario
-     por ello mismo, suele confundirse al ingresar largas cadenas de texto o peticiones
-    *No se pudieron conseguir ciertos puntos solicitados, por el tema de los permisos que otorga
-     Facebook actualmente, entre ellas estan : BUSCAR USUARIOS, LISTAR AMIGOS Y SEGUIDORES, SEGUIR
-     USUARIO O SOLICITAR AMISTAD, ENVIAR MENSAJE A UN USUARIO
-    *Se intento cubrir todo tipo de errores posibles, como el uso del TOKEN DE ACCESO, el cual dura
-     unicamente 2 meses como mucho. Para encontrar otro token de acceso, comunicarse con el soporte
+    *Al ser un bebe bot, no esta del todo acostumbrado a largas frases
+     otorgadas por el usuario por ello mismo, suele confundirse al ingresar
+     largas cadenas de texto o peticiones
+    *No se pudieron conseguir ciertos puntos solicitados, por el tema de los
+     permisos que otorga Facebook actualmente, entre ellas estan : BUSCAR
+     USUARIOS, LISTAR AMIGOS Y SEGUIDORES, SEGUIR USUARIO O SOLICITAR AMISTAD,
+     ENVIAR MENSAJE A UN USUARIO
+    *Se intento cubrir todo tipo de errores posibles, como el uso del TOKEN DE
+     ACCESO, el cual dura unicamente 2 meses como mucho. Para encontrar otro
+     token de acceso, comunicarse con el soporte
     '''
     + Fore.WHITE +
     '''
@@ -600,31 +637,35 @@ def informacion_inicial():
     '''
     + Fore.GREEN +
     '''
-    #Como se menciono previamente, CRUX no se lleva bien con largas frases o dialogos complejos,
-     por eso mismo se recomienda una diccion en lo posible lo mas sencilla y directa posible para
-     su correcto funcionamiento!
-    #Aca les dejamos una lista de archivos soportados para la subida de imagenes: [TOMI ACA PA]
-    #Nuestro Lil CRUX a veces se atolondra y no da buenas respuestas y al ser el programa manejado
-     por el, suele tirar para cualquier lado, les pedimos paciencia y que reinicie el programa.
-     Crux es un bebe, todos fuimos bebes o lo seguimos siendo en algunos casos.
-    #Si aun asi los errores perstisten, se recomienda encarecidamente borra el archivo que se generar
-     en la carpeta del programa el cual se llama "db.sqlite3", el cual es como un registro de memoria
-     de CRUX, con ello se reiniciara y podra dar un mejor funcionamiento.
+    #Como se menciono previamente, CRUX no se lleva bien con largas frases o
+     dialogos complejos, por eso mismo se recomienda una diccion en lo posible
+     lo mas sencilla y directa posible para su correcto funcionamiento!
+    #Aca les dejamos una lista de archivos soportados para la subida de
+     imagenes: [TOMI ACA PA]
+    #Nuestro Lil CRUX a veces se atolondra y no da buenas respuestas y al ser
+     el programa manejado por el, suele tirar para cualquier lado, les pedimos
+     paciencia y que reinicie el programa. Crux es un bebe, todos fuimos bebes
+     o lo seguimos siendo en algunos casos.
+    #Si aun asi los errores perstisten, se recomienda encarecidamente borra el
+     archivo que se generar en la carpeta del programa el cual se llama
+     "db.sqlite3", el cual es como un registro de memoria de CRUX, con ello se
+     reiniciara y podra dar un mejor funcionamiento.
     '''
     + Fore.WHITE +
     '''
     Sin mas preambulos, los dejamos con el programa. Esperamos que lo disfruten!
-    Saludos de parte de Enzo y Tomi!
+    Saludos de parte de Enzo y Tomas!
     ''')
 
     '''
     PRE:
-    Se entrenara al bot mediante las librerias de CHATTERBOT, se abre el archivo de
-    entrenamiento "trainer.txt" y procede a entrenar al bot mediante cada linea,
-    que pasaran a ser listas
+    Se entrenara al bot mediante las librerias de CHATTERBOT, se abre el
+    archivo de entrenamiento "trainer.txt" y procede a entrenar al bot
+    mediante cada linea, que pasaran a ser listas
     POST:
-    Las respuestas seras guardadas dentro de una lista llamada "respuestas" con el
-    fin de usarlas de frases clave para navegar dentro de las opciones del menu
+    Las respuestas seras guardadas dentro de una lista llamada "respuestas"
+    con el fin de usarlas de frases clave para navegar dentro de las opciones
+    del menu
     '''
     print("Bienvenido al Bot de CRUX!!")
 
@@ -636,5 +677,6 @@ def main():
     charla = conversacion(nombre_usuario, datos_api, datos_api_sdk, crux_bot, entrenamiento, log)
     log.close()
     print("FIN")
+
 
 main()
