@@ -2,7 +2,7 @@ si,Vamos a ver las opciones!
 leer publicaciones,Copiado! Vamos a ver que posteos hay
 postear,Vamos a realizar un post!
 publicar foto,Vamos a subir una foto!
-ver seguidores,Entendido capo! Vamos a ver los seguidores
+ver seguidores,Entendido! Vamos a ver los seguidores
 perfil,Entendido veremos el perfil
 chau ,Hasta la proxima!
 dar like,Entonces vamos a dar like!
@@ -14,14 +14,14 @@ miremos esas opciones,Vamos a ver las opciones!
 ver opciones,Vamos a ver las opciones!
 veamos las opciones,Vamos a ver las opciones!
 opciones,Vamos a ver las opciones!
-leer posteos,Copiado! Vamos a ver que posteos hay
-ver posts,Copiado! Vamos a ver que posteos hay
+posteos,Copiado! Vamos a ver que posteos hay
+veamos posteos,Copiado! Vamos a ver que posteos hay
 muestrame los posts,Copiado! Vamos a ver que posteos hay
-posts,Copiado! Vamos a ver que posteos hay
-publicaciones,Copiado! Vamos a ver que posteos hay
-ver publicaciones,Copiado! Vamos a ver que posteos hay
+posteos,Copiado! Vamos a ver que posteos hay
 ver posts,Copiado! Vamos a ver que posteos hay
 leer posts,Copiado! Vamos a ver que posteos hay
+ver posteos,Copiado! Vamos a ver que posteos hay
+leer posteos,Copiado! Vamos a ver que posteos hay
 dar me gusta,Entonces vamos a dar like!
 likear un post,Entonces vamos a dar like!
 likear publicacion,Entonces vamos a dar like!
@@ -42,21 +42,24 @@ subir post,Vamos a realizar un post!
 subir foto,Vamos a subir una foto!
 foto,Vamos a subir una foto!
 subir imagen,Vamos a subir una foto!
+subamos una foto,Vamos a subir una foto!
 publicar imagen,Vamos a subir una foto!
 imagen,Vamos a subir una foto!
-veamos seguidores,Entendido capo! Vamos a ver los seguidores
-followers,Entendido capo! Vamos a ver los seguidores
-ver followers,Entendido capo! Vamos a ver los seguidores
-seguidores,Entendido capo! Vamos a ver los seguidores
+veamos seguidores,Entendido! Vamos a ver los seguidores
+followers,Entendido! Vamos a ver los seguidores
+ver followers,Entendido! Vamos a ver los seguidores
+seguidores,Entendido! Vamos a ver los seguidores
+quiero ver seguidores,Entendido! Vamos a ver los seguidores
 mostrar perfil,Entendido veremos el perfil
 ver perfil,Entendido veremos el perfil
+quiero ver perfil,Entendido veremos el perfil
 adios,Hasta la proxima!
 cerrar,Hasta la proxima!
 salir,Hasta la proxima!
 saludo inicial, Bienvenido! Soy CRUX el asistente de la pagina virtual de facebook!
 hola crux,Holaaaa! Desea ver las opciones?
 hola,Holaaaaa! Desea ver las opciones?
-hello,hello! Desea ver las opciones?
+hello,Hello! Desea ver las opciones?
 como estas?,Estoy bien y vos?
 bien y vos?,Estoy bien y vos?
 bien,Me alegro!Vemos opciones?

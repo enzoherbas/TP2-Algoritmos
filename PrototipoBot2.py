@@ -15,7 +15,7 @@ ID_PAGINA = "341526406956810"
 def entrenamiento_bot(crux_bot):
     
     entrenamiento = ListTrainer(crux_bot, show_training_progress = False)
-    texto_entrenamiento = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\trainer.txt")
+    texto_entrenamiento = open("trainer.txt","r")
     respuestas_clave = []
     for linea_de_dialogo in texto_entrenamiento:
         linea_de_dialogo = linea_de_dialogo.rstrip("\n").split(",")
@@ -52,26 +52,17 @@ def ver_posteos(usuario, respuestas,datos_usuario,crux_bot,log):
     modificacion. En este caso las modicaciones se enviaran a "modificacion_posts" para seguir con las
     ordenes de modificacion
     '''
-    finalizar_modificaciones = False
-    while finalizar_modificaciones == False:
-        dicc_posts, cantidad_post = visualizar_post(datos_usuario)
-        contador = 0
-        acciones_bot("seccion1",crux_bot,log)
-        respuesta_usuario = acciones_usuario(usuario,log)
-        if respuesta_usuario == "si":
-            contador += 1
-            if contador == 0:
-                acciones_bot("seccion11",crux_bot,log)
-            elif contador > 1:
-                acciones_bot("cod25",crux_bot,log)
-            modificacion_posts(dicc_posts,usuario,cantidad_post,respuestas,datos_usuario,crux_bot,log)
-            acciones_bot("seccion11",crux_bot,log)
-            continuar_modificaciones = acciones_usuario(usuario,log)
-            if continuar_modificaciones != "si":
-                finalizar_modificaciones = True
+    dicc_posts, cantidad_post = visualizar_post(datos_usuario)
+    acciones_bot("seccion1",crux_bot,log)
+    respuesta_usuario = acciones_usuario(usuario,log)
+    while respuesta_usuario == "si":
+        modificacion_posts(dicc_posts,usuario,cantidad_post,respuestas,datos_usuario,crux_bot,log)
+        acciones_bot("seccion11",crux_bot,log)
+        continuar_modificaciones = acciones_usuario(usuario,log)
+        if continuar_modificaciones == "si":
+            dicc_posts, cantidad_post = visualizar_post(datos_usuario)
         else:
-            finalizar_modificaciones = True
-
+            respuesta_usuario = False
 
 def visualizar_post(datos_usuario):
     posts_id = []
@@ -84,7 +75,7 @@ def visualizar_post(datos_usuario):
     for informacion_post in informacion_posts:
         fecha_post = informacion_post["created_time"].split("T")
         if ("story") not in informacion_post:
-            try:
+            if ("message") in informacion_post:
                 print('''
                         PUBLICACION N°{0}                 {1}
                         ////////////////////////////////////////////
@@ -93,7 +84,7 @@ def visualizar_post(datos_usuario):
                 post_id = (cantidad_post,informacion_post["id"])
                 posts_id.append(post_id)
                 cantidad_post += 1
-            except:
+            else:
                 print('''
                         PUBLICACION N°{0}                  {1}
                         ////////////////////////////////////////////
@@ -158,15 +149,12 @@ def modificacion_posts(id_posts,usuario,cantidad_post,respuestas,datos_usuario,c
     POST: Retora a la opcion anterior de "VER_POSTEOS" para verificar si desea seguir con las
     modificaciones.
     '''
-
-    eleccion_modificacion = True
-    while eleccion_modificacion == True:
-        acciones_bot("seccion2",crux_bot,log)
-        numero_post_elegido = acciones_usuario(usuario,log)
-        if numero_post_elegido.isnumeric() and int(numero_post_elegido) < cantidad_post:
-            eleccion_modificacion = False
-        else:
-            acciones_bot("seccion4",crux_bot,log)
+    acciones_bot("seccion2",crux_bot,log)
+    numero_post_elegido = acciones_usuario(usuario,log)
+    if numero_post_elegido.isnumeric() and int(numero_post_elegido) < cantidad_post:
+        eleccion_modificacion = False
+    else:
+        acciones_bot("seccion4",crux_bot,log)
     finalizar_accion = False
     while finalizar_accion == False:
         acciones_bot("seccion5",crux_bot,log)
@@ -518,7 +506,7 @@ def datos():
             'default_response': 'Disculpa, no logro entenderte. Intenta escribirlo de otra manera',
             'maximum_similarity_threshold': 0.85
         }])
-    log = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\log.txt","a")
+    log = open("log.txt","a")
     log.write("\nNueva sesion\nFecha, hora, Usuario/Crux, Mensaje\n")
     
     return nombre_usuario,datos_api,datos_api_sdk,crux_bot,log
