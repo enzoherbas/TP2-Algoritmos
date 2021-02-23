@@ -32,6 +32,7 @@ modificar post,Perfecto. Vamos a modificar un posteo
 actualizar post,Perfecto. Vamos a modificar un posteo
 cambiar publicacion,Perfecto. Vamos a modificar un posteo
 modificar publicacion,Perfecto. Vamos a modificar un posteo
+quiero modificarlo,Perfecto. Vamos a modificar un posteo
 modificar,Perfecto. Vamos a modificar un posteo
 cambiar,Perfecto. Vamos a modificar un posteo
 hacer un post,Vamos a realizar un post!
@@ -67,11 +68,11 @@ mal,Me alegro!Vemos opciones?
 seccion1,Desea realizar alguna modificacion? Ingrese SI. En caso contrario volvera al menu
 seccion2,Que numero de post desea modificar jefe?
 seccion3,Volviendo al menu jefe!
-seccion4,Seleccion incorrecta, reingrese!
+seccion4,Seleccion incorrecta; reingrese!
 seccion5,Desea dar un like o Modificar el post?
 seccion6,Se realizo la accion correctamente!
 cod4,Cambiemos el email entonces
-cod5,Genial, cambiemos el telefono
+cod5,Genial cambiemos el telefono
 cod3,Okay cambiaremos la descipcion de la pagina
 cod6,El ingreso del email es invalido pa, volve a escribir
 cod7,El ingreso del telefono no es valido, volve a ingresar

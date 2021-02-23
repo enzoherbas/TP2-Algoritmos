@@ -9,6 +9,8 @@ import pyfacebook
 import tkinter as tk
 from tkinter import filedialog
 from colorama import init, Fore, Back, Style
+import requests
+
 
 ID_PAGINA = "341526406956810"
 
@@ -180,8 +182,9 @@ def modificacion_posts(id_posts, usuario, cantidad_post, respuestas, datos_usuar
     '''
     acciones_bot("seccion2", crux_bot, log)
     numero_post_elegido = acciones_usuario(usuario, log)
-    if numero_post_elegido.isnumeric() and int(numero_post_elegido) < cantidad_post:
-        eleccion_modificacion = False
+    if numero_post_elegido.isnumeric():
+        if int(numero_post_elegido) < cantidad_post:
+            eleccion_modificacion = False
     else:
         acciones_bot("seccion4", crux_bot, log)
     finalizar_accion = False
@@ -327,7 +330,6 @@ def foto_ya_publicada(usuario, datos_usuario, crux_bot, log):
 
 
 def validacion_en_rango(rango_min, rango_max, usuario, crux_bot, log):
-    
     opcion = acciones_usuario(usuario, log)
     while not opcion.isnumeric() or int(opcion) not in range(rango_min, rango_max):
         acciones_bot("cod2", crux_bot, log)
@@ -336,7 +338,7 @@ def validacion_en_rango(rango_min, rango_max, usuario, crux_bot, log):
 
 
 def cambiar_foto_perfil(usuario, datos_api_sdk, datos_usuario, crux_bot, log):
-    
+
     acciones_bot("cod10", crux_bot, log)
     print("1. Subir una nueva foto de perfil\n2. Seleccionar una ya publicada")
     opcion = validacion_en_rango(1, 3, usuario, crux_bot, log)
@@ -426,7 +428,7 @@ def actualizar_datos(usuario, datos_api_sdk, datos_usuario, crux_bot, log):
 
 
 def subir_foto(usuario, datos_api_sdk, datos_usuario, crux_bot, log):
-    
+
     acciones_bot("cod21", crux_bot, log)
     print("1. Seleccionando archivo\n2. Mediante URL")
     opcion = validacion_en_rango(1, 3, usuario, crux_bot, log)
@@ -563,6 +565,15 @@ def acciones_usuario(usuario, log):
     return accion_usuario.lower()
 
 
+def verificar_conexion():
+    try:
+        r = requests.head("http://facebook.com", timeout=3)
+        return True
+
+    except requests.ConnectionError as error:
+        return False
+
+
 def datos():
     nombre_usuario = input("Por favor, ingrese su usuario: ")
     datos_api = Api(app_id="692001264799472", app_secret="60b272a45b500fef45f3c930d5d6d8df", long_term_token="EAAJ1XxmSjvABAIVSXdbeDkCVQuewmUMOs8ZClysBW8NWZBMx3zGR2wN3EWZBUwjlUfSh2NF7jDztlXSALCal8VYjGZAd69wZA0xd5XUBJpB6YY3bcZC1SZBV7juZCpnBHHdc8X6ZBN1O6CjAZBt9nWPZC4BY1v0KJfRGkhpRvXjiaZA1oPS90vt6HJcRIynEvxDadJsZD",)
@@ -571,12 +582,13 @@ def datos():
         {
             'import_path': 'chatterbot.logic.BestMatch',
             'default_response': 'Disculpa, no logro entenderte. Intenta escribirlo de otra manera',
-            'maximum_similarity_threshold': 0.95
+            'maximum_similarity_threshold': 0.30
         }])
     log = open("log.txt", "a")
     log.write("\nNueva sesion\nFecha, hora, Usuario/Crux, Mensaje\n")
+    conexion = verificar_conexion()
 
-    return nombre_usuario, datos_api, datos_api_sdk, crux_bot, log
+    return nombre_usuario, datos_api, datos_api_sdk, crux_bot, log, conexion
 
 
 def informacion_inicial():
@@ -672,11 +684,13 @@ def informacion_inicial():
 
 def main():
     informacion_inicial()
-    nombre_usuario, datos_api, datos_api_sdk, crux_bot, log = datos()
-    entrenamiento = entrenamiento_bot(crux_bot)
-    charla = conversacion(nombre_usuario, datos_api, datos_api_sdk, crux_bot, entrenamiento, log)
+    nombre_usuario, datos_api, datos_api_sdk, crux_bot, log, conexion = datos()
+    if conexion is True:
+        entrenamiento = entrenamiento_bot(crux_bot)
+        charla = conversacion(nombre_usuario, datos_api, datos_api_sdk, crux_bot, entrenamiento, log)
+    else:
+        print("No hay conexion a internet. Establezca una conexion y vuelva a ejecutar el programa.")
     log.close()
-    print("FIN")
 
 
 main()
