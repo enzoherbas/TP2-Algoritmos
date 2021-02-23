@@ -15,7 +15,7 @@ ID_PAGINA = "341526406956810"
 
 def entrenamiento_bot(crux_bot):
     entrenamiento = ListTrainer(crux_bot, show_training_progress=False)
-    texto_entrenamiento = open("trainer.txt", "r")
+    texto_entrenamiento = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\trainer.txt", "r")
     respuestas_clave = []
     for linea_de_dialogo in texto_entrenamiento:
         linea_de_dialogo = linea_de_dialogo.rstrip("\n").split(",")
@@ -284,9 +284,9 @@ def foto_url(usuario, accion, datos_usuario, crux_bot, log):
                 data = datos_usuario._parse_response(peticion)
                 ingreso_correcto = True
         except pyfacebook.error.PyFacebookException as error:
-            if ("(#100) picture should represent a valid URL" or "(#100) url should represent a valid URL") == error.message:
+            if ("(#100) picture should represent a valid URL" == error.message) or ("(#100) url should represent a valid URL" == error.message):
                 acciones_bot("cod16", crux_bot, log)
-            elif ("Missing or invalid image file" or "Invalid parameter" or "Could not fetch picture") == error.message:
+            elif ("Missing or invalid image file" == error.message) or ("Invalid parameter" == error.message) or ("Could not fetch picture" == error.message):
                 acciones_bot("cod17", crux_bot, log)
             else:
                 acciones_bot("cod14", crux_bot, log)
@@ -456,7 +456,7 @@ def conversacion(usuario, datos_api, datos_api_sdk, crux_bot, respuestas_clave, 
         if str(respuesta_bot) in respuestas_clave:
             indice_respuesta = respuestas_clave.index(str(respuesta_bot))
             if indice_respuesta == 6:
-                print("Adios{}".format(usuario))
+                print("Crux: Hasta luego, {}.".format(usuario))
                 continuar = False
             else:
                 selector_funciones(
