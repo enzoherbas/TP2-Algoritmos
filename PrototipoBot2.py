@@ -15,7 +15,7 @@ ID_PAGINA = "341526406956810"
 def entrenamiento_bot(crux_bot):
     
     entrenamiento = ListTrainer(crux_bot, show_training_progress = False)
-    texto_entrenamiento = open("trainer.txt")
+    texto_entrenamiento = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\trainer.txt")
     respuestas_clave = []
     for linea_de_dialogo in texto_entrenamiento:
         linea_de_dialogo = linea_de_dialogo.rstrip("\n").split(",")
@@ -209,9 +209,9 @@ def foto_archivo(usuario, accion,datos_api_sdk,crux_bot,log):
                     ingreso_correcto = True
                 elif accion == False:
                     acciones_bot("cod22",crux_bot,log)
-                    datos_api_sdk.put_photo(image = open(r"{0}".format(filename),"rb"), message = acciones_usuario(usuario))
+                    datos_api_sdk.put_photo(image = open(r"{0}".format(filename),"rb"), message = acciones_usuario(usuario,log))
                     ingreso_correcto = True
-                    acciones_bot("cod14",crux_bot,log)
+                    #acciones_bot("cod14",crux_bot,log)
             else:
                 acciones_bot("cod13",crux_bot,log)
                 salir = acciones_usuario(usuario,log)
@@ -220,7 +220,7 @@ def foto_archivo(usuario, accion,datos_api_sdk,crux_bot,log):
                 else:
                     ingreso_correcto = True
     except:
-        acciones_bot("cod14")
+        acciones_bot("cod14",crux_bot,log)
 
 def foto_url(usuario, accion,datos_usuario,crux_bot,log):
     ingreso_correcto = False
@@ -268,7 +268,7 @@ def listar_fotos_publicadas(usuario,datos_usuario,crux_bot,log):
         nro = lista_ids.index(ids) + 1
         print(nro, datos_2["link"], datos_2["album"]["name"])
     acciones_bot("cod18",crux_bot,log)
-    opcion = validacion_en_rango(1, len(lista_ids)+1,usuario)
+    opcion = validacion_en_rango(1, len(lista_ids)+1,usuario,crux_bot,log)
     foto_seleccionada = lista_ids[opcion-1]
     return foto_seleccionada
 
@@ -284,13 +284,14 @@ def foto_ya_publicada(usuario,datos_usuario,crux_bot,log):
     acciones_bot("cod14",crux_bot,log)
 
 def validacion_en_rango(rango_min, rango_max, usuario,crux_bot,log):
-    opcion = acciones_usuario(usuario)
+    opcion = acciones_usuario(usuario,log)
     while not opcion.isnumeric() or int(opcion) not in range(rango_min, rango_max):
         acciones_bot("cod2",crux_bot,log)
         opcion = acciones_usuario(usuario,log)
     return int(opcion)
 
 def cambiar_foto_perfil(usuario,datos_api_sdk,datos_usuario,crux_bot,log):
+    
     acciones_bot("cod10",crux_bot,log)
     print("1. Subir una nueva foto de perfil\n2. Seleccionar una ya publicada")
     opcion = validacion_en_rango(1,3,usuario,crux_bot,log)
@@ -374,9 +375,9 @@ def subir_foto(usuario,datos_api_sdk,datos_usuario,crux_bot,log):
     '''
     Hay que ver si se junta junto con la funcion SUBIR_POSTEO
     '''
-    acciones_bot("cod20",crux_bot,log)
+    acciones_bot("cod21",crux_bot,log)
     print("1. Seleccionando archivo\n2. Mediante URL")
-    opcion = validacion_en_rango(1, 3, usuario)
+    opcion = validacion_en_rango(1, 3, usuario,crux_bot,log)
     if opcion == 1:
         foto_archivo(usuario, False,datos_api_sdk,crux_bot,log)
     if opcion == 2:
@@ -405,8 +406,8 @@ def conversacion(usuario,datos_api,datos_api_sdk,crux_bot,respuestas_clave,log):
                 continuar = False
             else:
                 selector_funciones(indice_respuesta,usuario,datos_api,datos_api_sdk,crux_bot,respuestas_clave,log)
-                acciones_bot("seccion12",crux_bot,log)
-              
+                #acciones_bot("seccion12",crux_bot,log)
+
 def selector_funciones(indice_respuesta,usuario,datos_api,datos_api_sdk,crux_bot,respuestas_clave,log):
     if indice_respuesta == 0:
         print('''
@@ -459,10 +460,15 @@ def mensajes(usuario,crux_bot,log):
     '''
     peticion = input("{0}:".format(usuario))
     registro_log(peticion,usuario,log)
-    peticion = peticion.lower()
-    respuesta_bot = crux_bot.get_response(peticion)
-    registro_log(respuesta_bot,"Crux",log)
-    print("Crux:{0}".format(respuesta_bot))
+    if not peticion.isalpha():
+        respuesta_bot = crux_bot.get_response("cod24")
+        print(f"Crux: {respuesta_bot}")
+        registro_log(respuesta_bot,"Crux",log)
+    else:
+        peticion = peticion.lower()
+        respuesta_bot = crux_bot.get_response(peticion)
+        registro_log(respuesta_bot,"Crux",log)
+        print("Crux:{0}".format(respuesta_bot))
     return respuesta_bot
 
 def acciones_bot(codigo_accion,crux_bot,log):
@@ -500,7 +506,7 @@ def datos():
             'default_response': 'Disculpa, no logro entenderte. Intenta escribirlo de otra manera',
             'maximum_similarity_threshold': 0.85
         }])
-    log = open("log.txt","a")
+    log = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\log.txt","a")
     log.write("\nNueva sesion\nFecha, hora, Usuario/Crux, Mensaje\n")
     
     return nombre_usuario,datos_api,datos_api_sdk,crux_bot,log
