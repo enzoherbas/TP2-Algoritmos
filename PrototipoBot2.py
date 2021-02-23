@@ -16,6 +16,16 @@ ID_PAGINA = "341526406956810"
 
 
 def entrenamiento_bot(crux_bot):
+    '''
+    PRE:
+    Se ingresa la variable que esta abierta con el BOT y se realizara el
+    entrenamiento para el uso posterior del mismo, se abre un archivo de texto
+    donde estan guardadas todas sus frases previamente agregadas. Se lee el
+    archivo linea por linea, tomandolas como listas.
+    POST:
+    Se guarda la frase final de los primeros 8 dialogos que se usaran para
+    realizar las diferentes tareas en el programa.
+    '''
     entrenamiento = ListTrainer(crux_bot, show_training_progress=False)
     texto_entrenamiento = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\trainer.txt", "r")
     respuestas_clave = []
@@ -81,6 +91,14 @@ def ver_posteos(usuario, respuestas, datos_usuario, crux_bot, log):
 
 
 def visualizar_post(datos_usuario):
+    '''
+    PRE:
+    Se ingresan los datos de la pagina con los cuales se conseguiran
+    los id y se printearan cada uno de los posts.
+    POST:
+    Se devuelve un diccionario en el cual las keys seran el numero de post
+    y el contenido sera el ID del post, para posteriormente modificarlo.
+    '''
     posts_id = []
     informacion_posts = datos_usuario.get_page_posts(
         page_id=ID_PAGINA,
@@ -476,6 +494,16 @@ def conversacion(usuario, datos_api, datos_api_sdk, crux_bot, respuestas_clave, 
 
 
 def selector_funciones(indice_respuesta, usuario, datos_api, datos_api_sdk, crux_bot, respuestas_clave, log):
+    '''
+    PRE:
+    Ingresan todos los datos personales y de la app, para poder ejecutar
+    las distintas acciones que se realicen con el bot. Se ingresa mediante
+    la charla con el bot en el que la clave de acceso sera una frase
+    predefinida para el bot.
+    POST:
+    Se ejecutara la accion solicitada y se realizaran los cambios posteriores
+    en las funciones
+    '''
     if indice_respuesta == 0:
         print('''
     -Ver posteos y modificarlos
@@ -579,6 +607,10 @@ def verificar_conexion():
 
 
 def datos():
+    '''
+    Aca estan guardados todos los datos personales necesarios que iran
+    pasandose de una funcion a otra mediante el fluja del programa.
+    '''
     nombre_usuario = input("Por favor, ingrese su usuario: ")
     datos_api = Api(app_id="692001264799472", app_secret="60b272a45b500fef45f3c930d5d6d8df", long_term_token="EAAJ1XxmSjvABAIVSXdbeDkCVQuewmUMOs8ZClysBW8NWZBMx3zGR2wN3EWZBUwjlUfSh2NF7jDztlXSALCal8VYjGZAd69wZA0xd5XUBJpB6YY3bcZC1SZBV7juZCpnBHHdc8X6ZBN1O6CjAZBt9nWPZC4BY1v0KJfRGkhpRvXjiaZA1oPS90vt6HJcRIynEvxDadJsZD",)
     datos_api_sdk = facebook.GraphAPI("EAAJ1XxmSjvABAIVSXdbeDkCVQuewmUMOs8ZClysBW8NWZBMx3zGR2wN3EWZBUwjlUfSh2NF7jDztlXSALCal8VYjGZAd69wZA0xd5XUBJpB6YY3bcZC1SZBV7juZCpnBHHdc8X6ZBN1O6CjAZBt9nWPZC4BY1v0KJfRGkhpRvXjiaZA1oPS90vt6HJcRIynEvxDadJsZD")
@@ -596,6 +628,10 @@ def datos():
 
 
 def informacion_inicial():
+    '''
+    Los prints iniales del programa donde hay distintos tipos de advertencias
+    y recomendaciones para el optimo uso del BOT
+    '''
     print(Fore.BLACK +
     '''
     BIENVENIDOS AL TRABAJO PRACTICO DEL GRANDIOSO GRUPO 2!
