@@ -96,4 +96,9 @@ actualizar perfil,Entendido veremos el perfil
 actualizar datos,Entendido veremos el perfil
 cambiar foto de perfil,Entendido veremos el perfil
 no,Okay; Que queres hacer?
- ,Por favor ingrese una respuesta
+quiero ver los posteos,Copiado! Vamos a ver que posteos hay
+vamos a realizar un post,Vamos a realizar un post!
+seccion9,Desea continuar?
+seccion11,Quiere seguir realizando modificaciones? Ingrese "Si" de lo contrario saldra
+seccion12,Nos encontramos en el menu principal
+cod25,hola

@@ -54,40 +54,16 @@ def ver_posteos(usuario, respuestas,datos_usuario,crux_bot,log):
     '''
     finalizar_modificaciones = False
     while finalizar_modificaciones == False:
-        posts_id = []
-        informacion_posts = datos_usuario.get_page_posts(
-            page_id = ID_PAGINA,
-            fields= "story,message,permalink_url,created_time",
-            return_json = True,
-            count=None)
-        cantidad_post = 1
-        for informacion_post in informacion_posts:
-            fecha_post = informacion_post["created_time"].split("T")
-            if ("story") not in informacion_post:
-                try:
-                    print('''
-                            PUBLICACION N°{0}                 {1}
-                            ////////////////////////////////////////////
-                            Texto del Post:{2}'''
-                            .format(cantidad_post,fecha_post[0],informacion_post["message"]))
-                    post_id = (cantidad_post,informacion_post["id"])
-                    posts_id.append(post_id)
-                    cantidad_post += 1
-                except:
-                    print('''
-                            PUBLICACION N°{0}                  {1}
-                            ////////////////////////////////////////////
-                            El POST es una imagen!
-                            
-                            -URL de imagen: {2}'''
-                            .format(cantidad_post,fecha_post[0],informacion_post["permalink_url"]))
-                    post_id = (cantidad_post,informacion_post["id"])
-                    posts_id.append(post_id)
-                    cantidad_post += 1
-        dicc_posts = dict(posts_id)
+        dicc_posts, cantidad_post = visualizar_post(datos_usuario)
+        contador = 0
         acciones_bot("seccion1",crux_bot,log)
         respuesta_usuario = acciones_usuario(usuario,log)
         if respuesta_usuario == "si":
+            contador += 1
+            if contador == 0:
+                acciones_bot("seccion11",crux_bot,log)
+            elif contador > 1:
+                acciones_bot("cod25",crux_bot,log)
             modificacion_posts(dicc_posts,usuario,cantidad_post,respuestas,datos_usuario,crux_bot,log)
             acciones_bot("seccion11",crux_bot,log)
             continuar_modificaciones = acciones_usuario(usuario,log)
@@ -95,6 +71,40 @@ def ver_posteos(usuario, respuestas,datos_usuario,crux_bot,log):
                 finalizar_modificaciones = True
         else:
             finalizar_modificaciones = True
+
+
+def visualizar_post(datos_usuario):
+    posts_id = []
+    informacion_posts = datos_usuario.get_page_posts(
+        page_id = ID_PAGINA,
+        fields= "story,message,permalink_url,created_time",
+        return_json = True,
+        count=None)
+    cantidad_post = 1
+    for informacion_post in informacion_posts:
+        fecha_post = informacion_post["created_time"].split("T")
+        if ("story") not in informacion_post:
+            try:
+                print('''
+                        PUBLICACION N°{0}                 {1}
+                        ////////////////////////////////////////////
+                        Texto del Post:{2}'''
+                        .format(cantidad_post,fecha_post[0],informacion_post["message"]))
+                post_id = (cantidad_post,informacion_post["id"])
+                posts_id.append(post_id)
+                cantidad_post += 1
+            except:
+                print('''
+                        PUBLICACION N°{0}                  {1}
+                        ////////////////////////////////////////////
+                        El POST es una imagen!
+                        
+                        -URL de imagen: {2}'''
+                        .format(cantidad_post,fecha_post[0],informacion_post["permalink_url"]))
+                post_id = (cantidad_post,informacion_post["id"])
+                posts_id.append(post_id)
+                cantidad_post += 1
+    return dict(posts_id), cantidad_post
 
 def subir_posteo(usuario,datos_usuario,crux_bot,log):
     '''
@@ -148,6 +158,7 @@ def modificacion_posts(id_posts,usuario,cantidad_post,respuestas,datos_usuario,c
     POST: Retora a la opcion anterior de "VER_POSTEOS" para verificar si desea seguir con las
     modificaciones.
     '''
+
     eleccion_modificacion = True
     while eleccion_modificacion == True:
         acciones_bot("seccion2",crux_bot,log)
@@ -171,6 +182,7 @@ def modificacion_posts(id_posts,usuario,cantidad_post,respuestas,datos_usuario,c
         elif str(selector_modificacion) == respuestas[9]:
             eliminar_post(id_posts[int(numero_post_elegido)],datos_usuario)
             acciones_bot("seccion6",crux_bot,log)
+            finalizar_accion = True
         else:
             acciones_bot("seccion4",crux_bot,log)
 
