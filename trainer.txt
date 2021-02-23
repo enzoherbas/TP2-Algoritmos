@@ -82,7 +82,7 @@ cod14,La foto se subio correctamente
 cod15,A continuacion ingrese la URL de la imagen que quiera como foto de perfil
 cod16,URL ingresado no es valido; por favor vuelva a ingresar
 cod17,URL ingresado no contiene una imagen: vuelva a ingresar
-cod18,Se listaron todas las fotos publicadas con el nombre del album al que pertenecen; Ingrese el nro de la que quiera como foto de perfil
+cod18,Se listaron todas las fotos publicadas junto al nombre del album al que pertenecen; Ingrese el nro de la que quiera como foto de perfil
 cod1,A continuacion se muestra lo que puede modificar
 cod2,Lo ingresado no es valido, por favor vuelva a intentar.
 cod19,Desea realizar otra modificaion? Ingrese 'Si' de lo contrario saldra.
@@ -96,3 +96,4 @@ actualizar perfil,Entendido veremos el perfil
 actualizar datos,Entendido veremos el perfil
 cambiar foto de perfil,Entendido veremos el perfil
 no,Okay; Que queres hacer?
+ ,Por favor ingrese una respuesta
