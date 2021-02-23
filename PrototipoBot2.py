@@ -17,7 +17,7 @@ ID_PAGINA = "341526406956810"
 
 def entrenamiento_bot(crux_bot):
     entrenamiento = ListTrainer(crux_bot, show_training_progress=False)
-    texto_entrenamiento = open(r"C:\Users\Tomas\Documents\Tp Alg\TP2-Algoritmos\trainer.txt", "r")
+    texto_entrenamiento = open("trainer.txt", "r")
     respuestas_clave = []
     for linea_de_dialogo in texto_entrenamiento:
         linea_de_dialogo = linea_de_dialogo.rstrip("\n").split(",")
@@ -180,13 +180,17 @@ def modificacion_posts(id_posts, usuario, cantidad_post, respuestas, datos_usuar
     POST: Retora a la opcion anterior de "VER_POSTEOS" para verificar si desea
     seguir con las modificaciones.
     '''
-    acciones_bot("seccion2", crux_bot, log)
-    numero_post_elegido = acciones_usuario(usuario, log)
-    if numero_post_elegido.isnumeric():
-        if int(numero_post_elegido) < cantidad_post:
-            eleccion_modificacion = False
-    else:
-        acciones_bot("seccion4", crux_bot, log)
+    eleccion_modificacion = True
+    while eleccion_modificacion is True:
+        acciones_bot("seccion2", crux_bot, log)
+        numero_post_elegido = acciones_usuario(usuario, log)
+        if numero_post_elegido.isnumeric():
+            if int(numero_post_elegido) < cantidad_post:
+                eleccion_modificacion = False
+            else:
+                acciones_bot("seccion4", crux_bot, log)
+        else:
+            acciones_bot("seccion4", crux_bot, log)
     finalizar_accion = False
     while not finalizar_accion:
         acciones_bot("seccion5", crux_bot, log)
