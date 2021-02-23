@@ -248,9 +248,9 @@ def foto_url(usuario, accion,datos_usuario,crux_bot,log):
                 data = datos_usuario._parse_response(peticion)
                 ingreso_correcto = True
         except pyfacebook.error.PyFacebookException as error:
-            if "(#100) picture should represent a valid URL" or "(#100) url should represent a valid URL "== error.message:
+            if ("(#100) picture should represent a valid URL" or "(#100) url should represent a valid URL")== error.message:
                 acciones_bot("cod16",crux_bot,log)
-            elif "Missing or invalid image file" or "Invalid parameter" == error.message:
+            elif ("Missing or invalid image file" or "Invalid parameter" or "Could not fetch picture") == error.message:
                 acciones_bot("cod17",crux_bot,log)
             else:
                 acciones_bot("cod14",crux_bot,log)
@@ -301,9 +301,9 @@ def cambiar_foto_perfil(usuario,datos_api_sdk,datos_usuario,crux_bot,log):
         opcion_2 = validacion_en_rango(1,3,usuario,crux_bot,log)
         if opcion_2 == 1:
             acciones_bot("cod12",crux_bot,log)
-            foto_archivo(usuario, True,datos_api_sdk,crux_bot,log)
+            foto_archivo(usuario,True,datos_api_sdk,crux_bot,log)
         if opcion_2 == 2:
-            foto_url(usuario, False,datos_usuario,crux_bot,log)
+            foto_url(usuario,True,datos_usuario,crux_bot,log)
     if opcion == 2:
         foto_ya_publicada(usuario,datos_usuario,crux_bot,log)
 
@@ -414,7 +414,6 @@ def selector_funciones(indice_respuesta,usuario,datos_api,datos_api_sdk,crux_bot
     -Ver posteos y modificarlos
     -Subir foto
     -Subir posteo
-    -Actualizar post
     -Cantidad de seguidores
     -Actualizar datos del perfil
     -Salir          
