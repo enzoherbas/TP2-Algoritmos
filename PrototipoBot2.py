@@ -327,6 +327,7 @@ def foto_ya_publicada(usuario, datos_usuario, crux_bot, log):
 
 
 def validacion_en_rango(rango_min, rango_max, usuario, crux_bot, log):
+    
     opcion = acciones_usuario(usuario, log)
     while not opcion.isnumeric() or int(opcion) not in range(rango_min, rango_max):
         acciones_bot("cod2", crux_bot, log)
@@ -335,6 +336,7 @@ def validacion_en_rango(rango_min, rango_max, usuario, crux_bot, log):
 
 
 def cambiar_foto_perfil(usuario, datos_api_sdk, datos_usuario, crux_bot, log):
+    
     acciones_bot("cod10", crux_bot, log)
     print("1. Subir una nueva foto de perfil\n2. Seleccionar una ya publicada")
     opcion = validacion_en_rango(1, 3, usuario, crux_bot, log)
@@ -424,9 +426,7 @@ def actualizar_datos(usuario, datos_api_sdk, datos_usuario, crux_bot, log):
 
 
 def subir_foto(usuario, datos_api_sdk, datos_usuario, crux_bot, log):
-    '''
-    Hay que ver si se junta junto con la funcion SUBIR_POSTEO
-    '''
+    
     acciones_bot("cod21", crux_bot, log)
     print("1. Seleccionando archivo\n2. Mediante URL")
     opcion = validacion_en_rango(1, 3, usuario, crux_bot, log)
