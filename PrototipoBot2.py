@@ -522,7 +522,7 @@ def mensajes(usuario, crux_bot, log):
     '''
     peticion = input("{0}:".format(usuario))
     registro_log(peticion, usuario, log)
-    if not peticion.isalpha():
+    if not peticion or peticion.isspace():
         respuesta_bot = crux_bot.get_response("cod24")
         print(f"Crux: {respuesta_bot}")
         registro_log(respuesta_bot, "Crux", log)
@@ -571,7 +571,7 @@ def datos():
         {
             'import_path': 'chatterbot.logic.BestMatch',
             'default_response': 'Disculpa, no logro entenderte. Intenta escribirlo de otra manera',
-            'maximum_similarity_threshold': 0.70
+            'maximum_similarity_threshold': 0.95
         }])
     log = open("log.txt", "a")
     log.write("\nNueva sesion\nFecha, hora, Usuario/Crux, Mensaje\n")
